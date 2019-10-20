@@ -5,29 +5,16 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Serveur extends Humain implements Femme, Homme
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
+public class Serveur extends Humain implements Homme, Femme{
 
-    /**
-     * Constructeur d'objets de classe Serveur
-     */
-    public Serveur()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    public Serveur(String prenom, String surnom, int porteMonnaie, int cotePopularite, String criSignificatif) {
+        super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
     }
+    
+    @Override
+    public void caracteristiqueHomme() {}
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
-    }
+    @Override
+    public void caracteristiqueFemme() {}
+    
 }

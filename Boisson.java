@@ -7,5 +7,5 @@
  */
 public enum Boisson
 {
-    LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI, DIMANCHE
+    "Jus de fruit", "Johnny WALKER", "VODKA", "Bissap", VENDREDI, SAMEDI, DIMANCHE
 }
