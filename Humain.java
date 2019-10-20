@@ -11,7 +11,7 @@ public abstract class Humain
 
     protected String prenom;
     protected String surnom;
-    protected String porteMonnaie;
+    protected int porteMonnaie;
     protected int cotePopularite; 
     protected String criSignificatif;
     
@@ -55,6 +55,7 @@ public abstract class Humain
     }
     public void presentMyself()
     {
+        
         return ;
     }
 }
