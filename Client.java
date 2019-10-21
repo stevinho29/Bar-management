@@ -42,14 +42,23 @@ public class Client extends Humain implements Homme, Femme{
         this.niveauAlcoolemie = niveauAlcoolemie;
     }
     
-    public void getDrinks() // se faire offrir un verre
-    {
-        
+    public void getDrinks(Humain humain, Boisson boisson, int quantite, Barman barman) { // se faire offrir un verre par quelqu'un
+        humain.offerDrinks(boisson, quantite, barman, this);
     }
+    
     public void otherPresentation() {// se présenter autrement
         System.out.println(criSignificatif + "!!!!!");
-        System.out.println("Moi, " + prenom + " aussi appelé " + surnom + ". Il ne me reste plus que " + porteMonnaie + " euros en poche.");
+        System.out.println("Officiellement je suis, " + prenom + "; on m'appelle aussi " + surnom + ". Il ne me reste plus que " + porteMonnaie + " euros en poche.");
     }
+
+    @Override
+    public void boire() {
+        int contenuInitial = this.contenuVerre;
+        super.boire();
+        if(contenuInitial != this.contenuVerre)
+            this.setNiveauAlcoolemie(this.getNiveauAlcoolemie() +1);// ne prend pas en compte le fait que la boisson soit alcoolisée ou pas
+    }
+    
     @Override
     public void caracteristiqueHomme() {}
 

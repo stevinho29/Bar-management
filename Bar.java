@@ -1,33 +1,28 @@
 
+import java.util.ArrayList;
 /**
  * Décrivez votre classe Bar ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Bar
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
+public class Bar {
+    
+    public ArrayList<Boisson> Inventaire = new ArrayList<>();
 
-    /**
-     * Constructeur d'objets de classe Bar
-     */
-    public Bar()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    public ArrayList<Boisson> getInventaire() {
+        return Inventaire;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    public void setInventaire(ArrayList<Boisson> Inventaire) {
+        this.Inventaire = Inventaire;
+    }
+
+    public void addToInventaire(Boisson boisson) {
+        this.Inventaire.add(boisson);
+    }
+
+    public void removeFromInventaire(Boisson boisson) {
+        this.Inventaire.remove(boisson);
     }
 }

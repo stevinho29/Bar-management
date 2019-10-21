@@ -12,6 +12,7 @@ public abstract class Humain {
     protected float porteMonnaie;
     protected int cotePopularite;
     protected String criSignificatif;
+    protected int contenuVerre = 0;
 
     public Humain(String prenom, String surnom, int porteMonnaie, int cotePopularite, String criSignificatif) {
         this.prenom = prenom;
@@ -19,6 +20,14 @@ public abstract class Humain {
         this.porteMonnaie = porteMonnaie;
         this.cotePopularite = cotePopularite;
         this.criSignificatif = criSignificatif;
+    }
+
+    public Humain(String prenom, String surnom) {
+        this.prenom = prenom;
+        this.surnom = surnom;
+        this.porteMonnaie = 50;
+        this.cotePopularite = 0;
+        this.criSignificatif = "Youhooo";
     }
 
     public String getPrenom() {
@@ -41,16 +50,24 @@ public abstract class Humain {
         return criSignificatif;
     }
 
+    public int getContenuVerre() {
+        return contenuVerre;
+    }
+
     public void setSurnom(String surnom) {
         this.surnom = surnom;
     }
 
-    public void setPorteMonnaie(int porteMonnaie) {
+    public void setPorteMonnaie(float porteMonnaie) {
         this.porteMonnaie = porteMonnaie;
     }
 
     public void setCotePopularite(int cotePopularite) {
         this.cotePopularite = cotePopularite;
+    }
+
+    public void setContenuVerre(int contenuVerre) {
+        this.contenuVerre = contenuVerre;
     }
 
     public void setCriSignificatif(String criSignificatif) {
@@ -62,12 +79,20 @@ public abstract class Humain {
     }
     
     public void boire() { // boire un verre
+        if (contenuVerre > 5)
+            contenuVerre -= 5;
+        else if (contenuVerre > 0)
+            contenuVerre = 0;
+        else
+            System.out.println("Ah, mon verre est vide !!");
     }
     
-    public void payer() {// payer sa note
+    public void payer(Boisson boisson, int quantite, Barman barman) {// payer un verre
+        barman.vendreBoisson(boisson, quantite, this);
     }
     
-    public void offerDrinks() {// offrir un verre à quelqu'un
+    public void offerDrinks(Boisson boisson, int quantite, Barman barman, Humain humain) {// offrir un verre à quelqu'un
+        barman.vendreBoisson(boisson, quantite, humain);
     }
     
     public void presentMyself() {
