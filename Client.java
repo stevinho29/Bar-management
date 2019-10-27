@@ -5,7 +5,7 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Client extends Humain implements Homme, Femme{
+public class Client extends Humain {
     
     protected String boissonFavorite;
     protected String boissonDeSecours;
@@ -58,11 +58,5 @@ public class Client extends Humain implements Homme, Femme{
         if(contenuInitial != this.contenuVerre)
             this.setNiveauAlcoolemie(this.getNiveauAlcoolemie() +1);// ne prend pas en compte le fait que la boisson soit alcoolisée ou pas
     }
-    
-    @Override
-    public void caracteristiqueHomme() {}
-
-    @Override
-    public void caracteristiqueFemme() {}
     
 }

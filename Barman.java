@@ -5,7 +5,7 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Barman extends Humain implements Homme, Femme{
+public class Barman extends Humain {
     
     private Bar barEnCharge;
 
@@ -31,11 +31,5 @@ public class Barman extends Humain implements Homme, Femme{
             System.out.println("Il n'y a pas cette boisson dans notre bar !!");
         }
     }
-    
-    @Override
-    public void caracteristiqueHomme() {}
-
-    @Override
-    public void caracteristiqueFemme() {}
     
 }
