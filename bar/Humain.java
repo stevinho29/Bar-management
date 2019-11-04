@@ -1,9 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bar;
 
 /**
- * Décrivez votre classe Humain ici.
  *
- * @author (Steve ndemanou)
- * @version (13/10/2019)
+ * @author USER
  */
 public abstract class Humain {
     
@@ -13,6 +17,7 @@ public abstract class Humain {
     protected int cotePopularite;
     protected String criSignificatif;
     protected int contenuVerre = 0;
+    protected Boisson boissonVerre;
 
     public Humain(String prenom, String surnom, int porteMonnaie, int cotePopularite, String criSignificatif) {
         this.prenom = prenom;
@@ -54,6 +59,10 @@ public abstract class Humain {
         return contenuVerre;
     }
 
+    public Boisson getBoissonVerre() {
+        return boissonVerre;
+    }
+
     public void setSurnom(String surnom) {
         this.surnom = surnom;
     }
@@ -73,6 +82,10 @@ public abstract class Humain {
     public void setCriSignificatif(String criSignificatif) {
         this.criSignificatif = criSignificatif;
     }
+
+    public void setBoissonVerre(Boisson boissonVerre) {
+        this.boissonVerre = boissonVerre;
+    }
     
     public void  parler(String message) { //discuter avec des gens 
         System.out.println(message);
@@ -87,12 +100,12 @@ public abstract class Humain {
             System.out.println("Ah, mon verre est vide !!");
     }
     
-    public void payer(Boisson boisson, int quantite, Barman barman) {// payer un verre
-        barman.vendreBoisson(boisson, quantite, this);
+    public void payer(Boisson boisson, int quantite) {// payer un verre pour soi-même
+        Bar.getOneServeur().servirClient(boisson, quantite, this, this);
     }
     
-    public void offerDrinks(Boisson boisson, int quantite, Barman barman, Humain humain) {// offrir un verre à quelqu'un
-        barman.vendreBoisson(boisson, quantite, humain);
+    public void offerDrinks(Boisson boisson, int quantite, Humain ami) {// offrir un verre à quelqu'un
+        Bar.getOneServeur().servirClient(boisson, quantite, this, ami);
     }
     
     public void presentMyself() {
