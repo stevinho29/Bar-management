@@ -4,9 +4,9 @@ Dites au lecteur (qui ne sait rien du projet) ce qu'il a besoin de savoir.
 Au minimum, remplissez cette description :
 ------------------------------------------------------------------------
 
-TITRE DU PROJET :
+TITRE DU PROJET : BAR MANAGEMENT
 BUT POURSUIVI :
-VERSION ou DATE :
+VERSION ou DATE : 
 COMMENT INVOQUER CE PROJET :
-AUTEURS :
+AUTEURS : NDEMANOU STEVE
 INSTRUCTIONS Ŕ L'USAGER :
