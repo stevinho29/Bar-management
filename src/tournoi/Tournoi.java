@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import bar.Humain;
+
 public class Tournoi {
 
 	private String name;											// nom du tournoi
@@ -44,8 +46,25 @@ public class Tournoi {
 	public LocalDate getTournamentCreationDate() {
 		return TournamentCreationDate;
 	}
+	public TournamentState getState() {
+		return state;
+	}
+	public void setState(TournamentState state) {
+		this.state = state;
+	}
+	public LocalDate getDayOfTournament() {
+		return dayOfTournament;
+	}
+	public void setDayOfTournament(LocalDate dayOfTournament) {
+		this.dayOfTournament = dayOfTournament;
+	}
 	
-	
+	public ArrayList<Equipe> getTeamList() {
+		return teamList;
+	}
+	public void setTeamList(ArrayList<Equipe> teamList) {
+		this.teamList = teamList;
+	}
 	/* constructeur(s) */
 	public Tournoi(String name,int winprice,int participationCost,String tournamentPoster,ArrayList<Equipe> teamList) // constructeur de tournois automatique 
 	{
@@ -56,10 +75,21 @@ public class Tournoi {
 		this.tournamentPoster= tournamentPoster;
 		this.TournamentCreationDate= LocalDateTime.now().toLocalDate();
 		this.state = TournamentState.à_venir;
-		this.dayOfTournament= LocalDate.of(currentTime.getYear()+1, currentTime.getMonth(), currentTime.getDayOfYear());;
+		this.dayOfTournament= LocalDate.of(currentTime.getYear()+1, currentTime.getMonth(), currentTime.getDayOfMonth());;
 		this.teamList= teamList;
 	}
 	/* méthodes utiles*/
 	
+	public void displayTeamList()
+	{
+		System.out.println("la liste des équipes");
+		for(int i= 0;i < teamList.size();i++)
+		{
+			System.out.println("équipe "+i+"- "+teamList.get(i).getTeamName());
+			ArrayList<Humain> playerList= teamList.get(i).getPlayerList();
+			for(int j=0;j < playerList.size();j++)
+				System.out.println("joueur "+j+": "+playerList.get(j).getPrenom());
+		}
+	}
 	
 }

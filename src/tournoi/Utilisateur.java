@@ -1,8 +1,21 @@
 package tournoi;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-import bar.*;
+import bar.Bar;
+import bar.Barman;
+import bar.Bijoux;
+import bar.Boisson;
+import bar.Client;
+import bar.ClientFemme;
+import bar.ClientHomme;
+import bar.Couleur;
+import bar.Humain;
+import bar.Patronne;
+import bar.Serveur;
+import bar.ServeurFemme;
+import bar.ServeurHomme;
 
 public class Utilisateur {
 
@@ -46,12 +59,18 @@ public class Utilisateur {
 	}
 	public void automaticBar()					// on crée un nouveau bar 					
 	{
-		Patronne patronne = automaticPatronne();
+		Patronne patronne = automaticPatronne(2);
 		Barman barman= automaticBarman();
-		ArrayList<Humain> list= automaticOccupantsList();
-		addPerso(patronne,list);
-		addPerso(barman,list);
-		Bar bar= new Bar("Queen victoria", patronne,barman, automaticInventaire(),list);
+		ArrayList<Humain> occupantsList= new ArrayList<Humain>() ;		// liste des occupants du bar
+		ArrayList<Serveur> serveursList= automaticServeursList();		// liste des seurveurs du bar
+		ArrayList<Client> clientsList= automaticClientList();		// liste des seurveurs du bar
+		for(int i =0;i < serveursList.size();i++)
+		{
+			occupantsList.add(i, serveursList.get(i));   			// par covariance des variables je peux peux stocker une variable fille dans une variable mère
+		}
+		addPerso(patronne,occupantsList);
+		addPerso(barman,occupantsList);
+		Bar bar= new Bar("Queen victoria", patronne,barman, automaticInventaire(),serveursList,occupantsList,clientsList);
 		addBar(bar); 						// on rajoute le bar nouvellement crée à la liste
 		
 	}
@@ -61,45 +80,45 @@ public class Utilisateur {
 	{
 		list.add(perso);
 	}
-	public ServeurHomme automaticServeurHomme()				//  méthode de création d'un serveur homme
+	public ServeurHomme automaticServeurHomme(int i)				//  méthode de création d'un serveur homme
 	{
 		String prenom[] = {"antony","joshua","romain","billy"};	// tableau de prénoms de serveurs
 		String surnom[]= {"anto","josh","jules cesar","bill"};	
 		String cri[]= {"aouuu","hehhehehe","pour la gloire de rome","tchap tchap"};
-		int i= (int)Math.random()*3;
+		
 	  	ServeurHomme serveur = new ServeurHomme(prenom[i], surnom[i], 500, 5, cri[i], 10);
 	  	return serveur;
 	}
-	public ServeurFemme automaticServeurFemme()				//  méthode de création d'une serveuse femme
+	public ServeurFemme automaticServeurFemme(int i)				//  méthode de création d'une serveuse femme
 	{
 		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
 		String surnom[]= {"Miss jane","al","kate","hills"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
-		int i= (int)Math.random()*3;
+		
 	  	ServeurFemme serveur = new ServeurFemme(prenom[i], surnom[i], 500, 5, cri[i], 10);
 	  	return serveur;
 	}
-	public ClientFemme automaticClientFemme()				//  méthode de création d'une serveuse femme
+	public ClientFemme automaticClientFemme(int i)				//  méthode de création d'une serveuse femme
 	{
 		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
 		String surnom[]= {"Miss jane","al","kate","hills"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
-		int i= (int)Math.random()*3;
+		
 		Bijoux bijou= Bijoux.bague ;
-	  	ClientFemme client = new ClientFemme(this.automaticBoisson(),this.automaticBoisson(),5,prenom[i],surnom[i],500, 5, cri[i],bijou);
+	  	ClientFemme client = new ClientFemme(this.automaticBoisson(3),this.automaticBoisson(0),5,prenom[i],surnom[i],500, 5, cri[i],bijou);
 
 	  	return client;
 	}
-	public ClientHomme automaticClientHomme()				//  méthode de création d'une serveuse femme
+	public ClientHomme automaticClientHomme(int i)				//  méthode de création d'une serveuse femme
 	{
-		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
-		String surnom[]= {"Miss jane","al","kate","hills"};	
+		String prenom[] = {"Godwin","junior","romain","billy"};	// tableau de prénoms de serveuses
+		String surnom[]= {"godwill","benjamin","romi","bill"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
-		int i= (int)Math.random()*3;
+		
 		Couleur color= Couleur.bleu ;
-	  	ClientHomme client = new ClientHomme(this.automaticBoisson(),this.automaticBoisson(),5,prenom[i],surnom[i],500, 5, cri[i],color);
+	  	ClientHomme client = new ClientHomme(this.automaticBoisson(1),this.automaticBoisson(0),5,prenom[i],surnom[i],500, 5, cri[i],color);
 
 	  	return client;
 	}
@@ -109,46 +128,76 @@ public class Utilisateur {
 		
 		return barman;
 	}
-	public Patronne automaticPatronne()
+	public Patronne automaticPatronne(int i)
 	{
-		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
-		String surnom[]= {"Miss jane","al","kate","hills"};	
+		String prenom[] = {"Maryweather","lana","lou","beverly"};	// tableau de prénoms de serveuses
+		String surnom[]= {"La diva","fox","the queen","cardi B"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
-		int i= (int)Math.random()*3;
 		Bijoux bijou= Bijoux.couronne ;
-		Patronne owner= new Patronne(this.automaticBoisson(),this.automaticBoisson(),5,prenom[i],surnom[i],500, 5, cri[i],bijou);
+		Patronne owner= new Patronne(this.automaticBoisson(1),this.automaticBoisson(2),5,prenom[i],surnom[i],500, 5, cri[i],bijou);
 		
 		return owner;
 	}
-	public ArrayList<Humain> automaticOccupantsList()		// on rajoute des personnages à la liste des occupants
+
+	/*
+	 * public ArrayList<Humain> automaticOccupantsList() // on rajoute des
+	 * personnages à la liste des occupants { ArrayList<Humain> occupants = new
+	 * ArrayList<Humain>(); for(int i=0; i< 4;i++) {
+	 * occupants.add(automaticServeurFemme());
+	 * occupants.add(automaticServeurHomme()); }
+	 * 
+	 * return occupants; }
+	 */
+	public ArrayList<Serveur> automaticServeursList()
 	{
-		ArrayList<Humain> occupants = new ArrayList<Humain>();
+		ArrayList<Serveur> serveurs= new ArrayList<Serveur>();
+		Random r= new Random();
+		int nb=0;
 		for(int i=0; i< 4;i++)
 		{
-			occupants.add(automaticServeurFemme());
-			occupants.add(automaticServeurHomme());
+			nb =r.nextInt(4);
+			if((!serveurs.contains(automaticServeurFemme(nb)) ))
+				serveurs.add(automaticServeurFemme(nb));
+			if(!serveurs.contains(automaticServeurHomme(nb)))
+				serveurs.add(automaticServeurHomme(nb));
+			
 		}
+		return serveurs;
+	}
+	public ArrayList<Client> automaticClientList()
+	{
+		ArrayList<Client> clients= new ArrayList<Client>();
 		
-		return occupants;
+		for(int i=0; i< 4;i++)
+		{
+				clients.add(automaticClientFemme(i));
+				clients.add(automaticClientHomme(i));
+		}
+		return clients;
 	}
 	/* création et load de l'inventaire de boisson du bar*/
-	public Boisson automaticBoisson()
+	public Boisson automaticBoisson( int i)
 	{
 		String nom[] = {"Rince cochon","cuvée des trolls","coca","panaché"};	// tableau de prénoms de serveuses
 		int quantite[]= {75,75,25,50};											// quantité en centilitre
-		float prix[]= {7,5,8,3,2};												// prix de boissons
+		float prix[]= {7,5,8,3};												// prix de boissons
 		boolean alcoolise[]= {true,true,false,false};							// alcoolise ou pas
-		int i= (int)Math.random()*3;
+		
 		Boisson boisson= new Boisson(nom[i],quantite[i],prix[i],alcoolise[i]);
 		
 		return boisson;
 	}
 	public ArrayList<Boisson> automaticInventaire()  							// on rajoute les boissons à l'inventaire
 	{
+		
 		ArrayList<Boisson> inventaire = new ArrayList<Boisson>();
 		for(int i=0; i< 4;i++)
-			inventaire.add(automaticBoisson());
+		{
+			
+			if((!inventaire.contains(automaticBoisson(i)) ))
+				inventaire.add(automaticBoisson(i));
+			}
 	
 		return inventaire;
 	}

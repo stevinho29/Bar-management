@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Bataille {
-	public static void start() {
+	private static Scanner sc = new Scanner(System.in); // instance de la classe Scanner
+	public  void start() {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in); // instance de la classe Scanner
@@ -18,7 +19,7 @@ public class Bataille {
 		 *  jouer contre un autre joueur OK 
 		 */		
 	   
-	do{	
+	//do{	
 		Pack pack= null;
 		char typeChoix[] = {'x','y','n','c'}; 	 // tableau contenant les choix possibles de l'utilisteur
 		char choix = 0; 						 	 // variable de choix utilisée dans le jeu
@@ -72,8 +73,8 @@ public class Bataille {
 		        	
 			}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x');
 	
-		System.out.println("fin du jeu à bientot\n\n");
-	}while(true);
+		System.out.println("Bataille terminée\n\n");
+	//}while(true);
 	
 	}
 	
@@ -117,7 +118,7 @@ public static Pack selectPack(Pack pack ,char choix)
 }
 public static void versusBot(Pack pack,int nbCartes)
 {
-	Scanner sc = new Scanner(System.in); // instance de la classe Scanner
+	
 		
 	int carte=0;							 // carte sélectionnée
 	final ArrayList<Integer> t1 = new ArrayList<Integer>(); 				 // tableau 1
@@ -191,8 +192,6 @@ public static void versusBot(Pack pack,int nbCartes)
 
 public static void versusPlayer(Pack pack,int nbCartes)
 {
-	Scanner sc = new Scanner(System.in); // instance de la classe Scanner
-	
 	int carte1=0;							 // carte joueur 1 sélectionnée
 	int carte2=0;							 // carte joueur 2 sélectionnée
 	final ArrayList<Integer> t1 = new ArrayList<Integer>(); 				 // tableau 1

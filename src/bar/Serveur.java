@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bar;
 
 import java.util.ArrayList;
@@ -10,34 +5,76 @@ import java.util.ArrayList;
 import tournoi.Utilisateur;
 
 /**
- *
- * @author USER
+ * <b>Humain est la classe representant un humain.</b><br>
+ * Un huamin est caracterise par :
+ * <ul>
+ * <li>Un prenom</li>
+ * <li>Un surnom</li>
+ * <li>Un porte-monnaie</li>
+ * <li>Une cote de popularite</li>
+ * <li>Un cri significatif</li>
+ * <li>Le contenu de son verre</li>
+ * <li>La boisson presente dans son verre</li>
+ * </ul>
+ * 
+ * @author Josias SEMANOU
+ * @version 1.0
  */
 public class Serveur extends Humain {
 
-    public Serveur(String prenom, String surnom, int porteMonnaie, int cotePopularite, String criSignificatif) {
+    /**
+     * Constructeur de Serveur
+     * 
+     * @param prenom
+     * @param surnom
+     * @param porteMonnaie
+     * @param cotePopularite
+     * @param criSignificatif
+     */
+    public Serveur(String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif) {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
+        Bar.addServeurs(this);
+        Bar.addOccupant(this);
     }
-    
+
+    /** 
+     * Boire la boisson servie dans son verre
+     * Uniquement de l'eau
+     * 
+     * @see bar.Humain#boire()
+     */
     @Override
-    public void boire() {//Uniquement de l'eau
+    public void boire() {
         if(this.boissonVerre.getNom().equals("EAU") && (!this.boissonVerre.isAlcoolise()))
             super.boire();
     }
     
+    /**
+     * Servir de la boisson a la demande d'un client
+     * A lui-meme ou un autre
+     * 
+     * @param boisson
+     * @param quantite
+     * @param clientADebiter
+     * @param clientAServir
+     */
     public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir) {
         getBar().getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir);
     }
-    // on récupère le bar dans lequel le serveur se trouve
+    
+    /**
+     * Recuperation du bar dans lequel le serveur se trouve
+     * @return Le bar
+     */
     public Bar getBar()
     {
     	Bar bar=null;
     	ArrayList<Bar> barlist= Utilisateur.getBarList();
-    		for(int i= 0 ;i <barlist.size();i++ )
-    		{
-    			if(barlist.get(i).getOccupants().contains(this))
-    				bar= barlist.get(i);
-    		}
+            for(int i= 0 ;i <barlist.size();i++ )
+            {
+                if(barlist.get(i).getOccupants().contains(this))
+                    bar= barlist.get(i);
+            }
     	return bar;
     }
     
