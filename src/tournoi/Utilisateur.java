@@ -65,15 +65,21 @@ public class Utilisateur {
 		ArrayList<Serveur> serveursList= automaticServeursList();		// liste des seurveurs du bar
 		ArrayList<Client> clientsList= automaticClientList();		// liste des seurveurs du bar
 		for(int i =0;i < serveursList.size();i++)
-		{
 			occupantsList.add(i, serveursList.get(i));   			// par covariance des variables je peux peux stocker une variable fille dans une variable mère
+		for(int i=0; i< clientsList.size();i++)
 			occupantsList.add(i, clientsList.get(i));
-		}
+	
 		addPerso(patronne,occupantsList);
 		addPerso(barman,occupantsList);
 		Bar bar= new Bar("Queen victoria", patronne,barman, automaticInventaire(),serveursList,occupantsList,clientsList);
 		addBar(bar); 						// on rajoute le bar nouvellement crée à la liste
 		
+	}
+	public Bar createBar(String name,Patronne patronne,Barman barman,ArrayList<Boisson> inventair,ArrayList<Serveur> serveursList,ArrayList<Humain> occupantsList,ArrayList<Client> clientsList)
+	{
+		Bar bar= new Bar("Queen victoria", patronne,barman, automaticInventaire(),serveursList,occupantsList,clientsList);
+		
+		return bar;
 	}
 	/*création de personnages */
 	
@@ -111,9 +117,16 @@ public class Utilisateur {
 
 	  	return client;
 	}
+	public ClientFemme createClientFemme(String name,String surname,String cri,Bijoux bijou)				//  méthode de création d'une serveuse femme
+	{
+	
+	  	ClientFemme client = new ClientFemme(this.automaticBoisson(3),this.automaticBoisson(0),5,name,surname,500, 5, cri,bijou);
+
+	  	return client;
+	}
 	public ClientHomme automaticClientHomme(int i)				//  méthode de création d'une serveuse femme
 	{
-		String prenom[] = {"client1","client2","cliente3","cliente4"};	// tableau de prénoms de serveuses
+		String prenom[] = {"client1","client2","client3","client4"};	// tableau de prénoms de serveuses
 		String surnom[]= {"godwill","benjamin","romi","bill"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
@@ -123,9 +136,21 @@ public class Utilisateur {
 
 	  	return client;
 	}
+	public ClientHomme createClientHomme(String name,String surname,String cri,Couleur color)
+	{
+		ClientHomme client = new ClientHomme(this.automaticBoisson(1),this.automaticBoisson(0),5,name,surname,500, 5, cri,color);
+
+	  	return client;
+	}
 	public Barman automaticBarman()
 	{
-		Barman barman= new Barman("Thomas", "tom", 500, 8,"une commande une");
+		Barman barman= new Barman("Thomas", "tom", 500, 8,"et une commande une");
+		
+		return barman;
+	}
+	public Barman createBarman(String name,String surname)
+	{
+		Barman barman= new Barman(name, surname, 500, 8,"et une commande une");
 		
 		return barman;
 	}
@@ -140,7 +165,14 @@ public class Utilisateur {
 		
 		return owner;
 	}
-
+	public Patronne createPatronne(String name,String surname,String cri)
+	{
+		
+		Bijoux bijou= Bijoux.couronne ;
+		Patronne owner= new Patronne(this.automaticBoisson(1),this.automaticBoisson(2),5,name,surname,500, 5, cri,bijou);
+		
+		return owner;
+	}
 	/*
 	 * public ArrayList<Humain> automaticOccupantsList() // on rajoute des
 	 * personnages à la liste des occupants { ArrayList<Humain> occupants = new
