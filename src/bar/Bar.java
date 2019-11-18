@@ -132,6 +132,8 @@ public class Bar {
      * @param inventaire
      * @param occupants
      */
+	public Bar()
+	{}
     public Bar(String name,Patronne patronne, Barman barmaid, ArrayList<Boisson> inventair,ArrayList<Serveur> serveurss ,ArrayList<Humain> occupantss,ArrayList<Client> clients)
     {
         this.nom = name;
@@ -319,7 +321,7 @@ public class Bar {
     	System.out.println("la liste des occupants du bar ma poulette");
     	for(int i=0;i < occupants.size();i++)
 		{
-			System.out.println(i+"- "+occupants.get(i));
+			System.out.println(i+"- "+occupants.get(i).getPrenom());
 		}
     }
     

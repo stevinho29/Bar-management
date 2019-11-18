@@ -48,6 +48,7 @@ public abstract class Client extends Humain {
      * @param cotePopularite
      * @param criSignificatif
      */
+
     public Client(Boisson boissonFavorite, Boisson boissonDeSecours, int niveauAlcoolemie, String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif) {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
         this.boissonFavorite = boissonFavorite;
@@ -111,8 +112,8 @@ public abstract class Client extends Humain {
      * @param humain
      * @param quantite
      */
-    public void getDrinks(Humain humain, int quantite) {
-        humain.offerDrinks(boissonFavorite, quantite, this);
+    public void getDrinks(Humain humain, int quantite,Bar bar) {
+        humain.offerDrinks(boissonFavorite, quantite, humain,bar);
     }
     
     /**
@@ -139,10 +140,10 @@ public abstract class Client extends Humain {
     /**
      * Se payer une boisson a boire
      * 
-     * @param quantite
+     * @param quantite d
      */
-    public void payer(int quantite) {
-        super.payer(boissonFavorite, quantite);
+    public void payer(int quantite,Bar bar) {
+        super.payer(boissonFavorite, quantite, bar);
     }
     
 }

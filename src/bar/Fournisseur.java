@@ -55,9 +55,9 @@ public class Fournisseur extends Humain {
      * @param cotePopularite
      * @param criSignificatif
      */
-    public Fournisseur(String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif) {
+    public Fournisseur(String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif,Bar bar) {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
-        stockFournisseur = getBar().getInventaire();
+        stockFournisseur = bar.getInventaire();
     }
     
     /**
@@ -84,7 +84,7 @@ public class Fournisseur extends Humain {
         commandeBoissons.forEach((boisson) -> {
             //malus de la quantite fournie sur le stock
             boisson.setQuantite(boisson.getQuantite() + quantiteParCommande);
-            parler("Voila  " + quantiteParCommande + " Litres de " + boisson.getNom() + " pour votre bar !");
+            parler("Voilaï¿½ " + quantiteParCommande + " Litres de " + boisson.getNom() + " pour votre bar !");
         });
         //recuperation du paiement
         if (prixCommande == 0)
@@ -110,15 +110,5 @@ public class Fournisseur extends Humain {
      * 
      * @return le bar dont il est le fournisseur
      */
-    public Bar getBar()
-    {
-    	Bar bar=null;
-    	ArrayList<Bar> barlist= Utilisateur.getBarList();
-        for(int i= 0 ;i <barlist.size();i++ )
-        {
-            if(barlist.get(i).getOccupants().contains(this))
-                bar= barlist.get(i);
-        }
-    	return bar;
-    }
+     
 }

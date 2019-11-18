@@ -10,7 +10,7 @@ public interface Proprietaire {
      * Recuperation de l'argent de la caisse
      * 
      */
-    public void recupererArgentCaisse();
+    public void recupererArgentCaisse(Bar bar);
     
     /**
      * Mise sur liste noire d'un client

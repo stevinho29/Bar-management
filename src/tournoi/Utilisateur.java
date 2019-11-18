@@ -19,17 +19,17 @@ import bar.ServeurHomme;
 
 public class Utilisateur {
 
-	private static ArrayList<Bar> barList = new ArrayList<Bar>();			//liste des bar de l'appli( par défaut ne contient qu'un seul bar
+	private  ArrayList<Bar> barList = new ArrayList<Bar>();			//liste des bar de l'appli( par défaut ne contient qu'un seul bar
 	
 	
 
     // accesseurs et mutateurs 
 	
-	public static ArrayList<Bar> getBarList() {
+	public  ArrayList<Bar> getBarList() {
 		return barList;
 	}
 
-	public static void setBarList(ArrayList<Bar> list) {
+	public  void setBarList(ArrayList<Bar> list) {
 		barList = list;
 	}
 	
@@ -67,6 +67,7 @@ public class Utilisateur {
 		for(int i =0;i < serveursList.size();i++)
 		{
 			occupantsList.add(i, serveursList.get(i));   			// par covariance des variables je peux peux stocker une variable fille dans une variable mère
+			occupantsList.add(i, clientsList.get(i));
 		}
 		addPerso(patronne,occupantsList);
 		addPerso(barman,occupantsList);
@@ -100,7 +101,7 @@ public class Utilisateur {
 	}
 	public ClientFemme automaticClientFemme(int i)				//  méthode de création d'une serveuse femme
 	{
-		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
+		String prenom[] = {"cliente1","cliente2","cliente3","cliente4"};	// tableau de prénoms de serveuses
 		String surnom[]= {"Miss jane","al","kate","hills"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
@@ -112,7 +113,7 @@ public class Utilisateur {
 	}
 	public ClientHomme automaticClientHomme(int i)				//  méthode de création d'une serveuse femme
 	{
-		String prenom[] = {"Godwin","junior","romain","billy"};	// tableau de prénoms de serveuses
+		String prenom[] = {"client1","client2","cliente3","cliente4"};	// tableau de prénoms de serveuses
 		String surnom[]= {"godwill","benjamin","romi","bill"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
@@ -130,7 +131,7 @@ public class Utilisateur {
 	}
 	public Patronne automaticPatronne(int i)
 	{
-		String prenom[] = {"Maryweather","lana","lou","beverly"};	// tableau de prénoms de serveuses
+		String prenom[] = {"Maryweather","lana","louloute","beverly"};	// tableau de prénoms de serveuses
 		String surnom[]= {"La diva","fox","the queen","cardi B"};	
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
@@ -152,16 +153,12 @@ public class Utilisateur {
 	public ArrayList<Serveur> automaticServeursList()
 	{
 		ArrayList<Serveur> serveurs= new ArrayList<Serveur>();
-		Random r= new Random();
-		int nb=0;
+		
+	
 		for(int i=0; i< 4;i++)
 		{
-			nb =r.nextInt(4);
-			if((!serveurs.contains(automaticServeurFemme(nb)) ))
-				serveurs.add(automaticServeurFemme(nb));
-			if(!serveurs.contains(automaticServeurHomme(nb)))
-				serveurs.add(automaticServeurHomme(nb));
-			
+				serveurs.add(automaticServeurFemme(i));
+				serveurs.add(automaticServeurHomme(i));
 		}
 		return serveurs;
 	}

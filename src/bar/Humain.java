@@ -218,8 +218,8 @@ public abstract class Humain {
      * @param boisson
      * @param quantite
      */
-    public void payer(Boisson boisson, int quantite) {
-        getBar().getOneServeur().servirClient(boisson, quantite, this, this);
+    public void payer(Boisson boisson, int quantite,Bar bar) {
+        bar.getOneServeur().servirClient(boisson, quantite, this, this,bar);
         
     }
     
@@ -230,8 +230,8 @@ public abstract class Humain {
      * @param quantite
      * @param ami
      */
-    public void offerDrinks(Boisson boisson, int quantite, Humain ami) {
-        getBar().getOneServeur().servirClient(boisson, quantite, this, ami);
+    public void offerDrinks(Boisson boisson, int quantite, Humain ami,Bar bar) {
+        bar.getOneServeur().servirClient(boisson, quantite, this, ami,bar);
         cotePopularite += 5;// la cote de popularite evolue quand on offre un verre a quelqu'un
     }
     
@@ -247,15 +247,5 @@ public abstract class Humain {
      * 
      * @return Le bar dans lequel il se trouve
      */
-    public Bar getBar()
-    {
-    	Bar bar=null;
-    	ArrayList<Bar> barlist= Utilisateur.getBarList();
-    		for(int i= 0 ;i <barlist.size();i++ )
-    		{
-    			if(barlist.get(i).getOccupants().contains(this))
-    				bar= barlist.get(i);
-    		}
-    	return bar;
-    }
+    
 }

@@ -58,12 +58,12 @@ public class ServeurFemme extends Serveur{
      * @see bar.Serveur#servirClient(bar.Boisson, int, bar.Humain, bar.Humain)
      */
     @Override
-    public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir) {
+    public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir,Bar bar) {
         if (clientADebiter.getClass().getSimpleName().equals("ClientHomme") && coefficientCharme > 50) {
             quantite *= 2;// la quantite demandee double lorsque la serveuse est charmante
             System.out.println("Comme je suis servis par la magnifique " + prenom + " je vais prendre " + quantite + " litres.");
         }
-        getBar().getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir);
+        bar.getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir,bar);
     }
     
 }

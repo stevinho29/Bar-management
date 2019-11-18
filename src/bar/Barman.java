@@ -44,9 +44,9 @@ public class Barman extends Humain {
      * @param bayeur
      * @param beneficiaire
      */
-    public void vendreBoisson(Boisson boisson, int quantite, Humain bayeur, Humain beneficiaire){
-        if(getBar().getInventaire().contains(boisson)){
-            Boisson boissonDuBar = getBar().getInventaire().get(getBar().getInventaire().indexOf(boisson));
+    public void vendreBoisson(Boisson boisson, int quantite, Humain bayeur, Humain beneficiaire,Bar bar){
+        if(bar.getInventaire().contains(boisson)){
+            Boisson boissonDuBar = bar.getInventaire().get(bar.getInventaire().indexOf(boisson));
             if (boissonDuBar.getQuantite() >= quantite) {// si il y a assez de boisson dans le stock
                 float coutTotal = boissonDuBar.getPrixVente()* quantite;
                 if(bayeur.getClass().getSimpleName().equals("Patronne")){//la patronne ne paie pas
@@ -57,7 +57,7 @@ public class Barman extends Humain {
                             + beneficiaire.getPrenom() + " ! De la part de notre Patronne " + bayeur.getPrenom());
                 }else if (bayeur.getPorteMonnaie() >= coutTotal) {// si celui qui offre la boisson a assez d'argent pour payer sa commande
                     bayeur.setPorteMonnaie(bayeur.getPorteMonnaie() - coutTotal);// retirer le cout de son portemonnaie
-                    Bar.setCaisse(getBar().getCaisse()+coutTotal);// ajouter ce montantà la caisse
+                    Bar.setCaisse(bar.getCaisse()+coutTotal);// ajouter ce montantà la caisse
                     boissonDuBar.setQuantite(boissonDuBar.getQuantite() - quantite);//retirer la quantite necessaire du stock
                     beneficiaire.setContenuVerre(beneficiaire.getContenuVerre() + quantite);//servir la quantite necessaire dans le verre du beneficiaire
                     beneficiaire.setBoissonVerre(boisson);//indiquer la boisson servie dans le verre
@@ -80,37 +80,22 @@ public class Barman extends Humain {
      * 
      * @param fournisseur
      */
-    public void commanderBoissons(Fournisseur fournisseur){
+    public void commanderBoissons(Fournisseur fournisseur,Bar bar){
         float prix = 0;
         ArrayList<Boisson> commande = new ArrayList<>();
-        getBar().getInventaire().forEach((boisson) -> {
+        bar.getInventaire().forEach((boisson) -> {
             if(boisson.getQuantite() < 20){
                 commande.add(boisson);
             }
         });
         prix = fournisseur.calculerPrix(commande);
-        if(prix < getBar().getCaisse()){
-            Bar.setCaisse(getBar().getCaisse() - prix);
+        if(prix < bar.getCaisse()){
+            Bar.setCaisse(bar.getCaisse() - prix);
             fournisseur.livrerBoissons();
         }
     }
     
-    /**
-     * Determine le bar dont il est le barman
-     * 
-     * @return Le bar dont il est barman
-     */
-    public Bar getBar()
-    {
-    	Bar bar=null;
-    	ArrayList<Bar> barlist= Utilisateur.getBarList();
-    		for(int i= 0 ;i <barlist.size();i++ )
-    		{
-    			if(barlist.get(i).getOccupants().contains(this))
-    				bar= barlist.get(i);
-    		}
-    	return bar;
-    }
+   
 
     /**
      * Se payer de la boisson 
@@ -118,7 +103,7 @@ public class Barman extends Humain {
      * @see bar.Humain#payer(bar.Boisson, int)
      */
     @Override
-    public void payer(Boisson boisson, int quantite) {
+    public void payer(Boisson boisson, int quantite,Bar bar) {
         setContenuVerre(getContenuVerre() + quantite);//servir la quantite necessaire dans son verre
         setBoissonVerre(boisson);//indiquer la boisson servie dans le verre
         parler("Voilà " + quantite + " Litres de " + boisson.getNom() + " pour moi le Barman !");

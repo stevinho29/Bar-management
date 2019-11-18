@@ -65,10 +65,10 @@ public class Patronne extends ClientFemme implements Proprietaire{
      * 
      * @see bar.Proprietaire#recupererArgentCaisse()
      */
-    @Override
-    public void recupererArgentCaisse() {// Elle recupere toujours la moitie des ressources presentes dans la Caisse
-        this.porteMonnaie += (getBar().getCaisse()/2);
-        Bar.setCaisse(getBar().getCaisse()/2);
+    
+    public void recupererArgentCaisse(Bar bar) {// Elle recupere toujours la moitie des ressources presentes dans la Caisse
+        this.porteMonnaie += (bar.getCaisse()/2);
+        Bar.setCaisse(bar.getCaisse()/2);
     }
     
     /**
@@ -114,16 +114,8 @@ public class Patronne extends ClientFemme implements Proprietaire{
      * 
      * @return Le bar dans lequel elle est patronne
      */
-    public Bar getBar()
-    {
-    	Bar bar=null;
-    	ArrayList<Bar> barlist= Utilisateur.getBarList();
-    		for(int i= 0 ;i <barlist.size();i++ )
-    		{
-    			if(barlist.get(i).getOccupants().contains(this))
-    				bar= barlist.get(i);
-    		}
-    	return bar;
-    }
+
+	
+    
     
 }

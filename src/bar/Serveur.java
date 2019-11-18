@@ -58,24 +58,14 @@ public class Serveur extends Humain {
      * @param clientADebiter
      * @param clientAServir
      */
-    public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir) {
-        getBar().getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir);
+    public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir,Bar bar) {
+        bar.getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir,bar);
     }
     
     /**
      * Recuperation du bar dans lequel le serveur se trouve
      * @return Le bar
      */
-    public Bar getBar()
-    {
-    	Bar bar=null;
-    	ArrayList<Bar> barlist= Utilisateur.getBarList();
-            for(int i= 0 ;i <barlist.size();i++ )
-            {
-                if(barlist.get(i).getOccupants().contains(this))
-                    bar= barlist.get(i);
-            }
-    	return bar;
-    }
+    
     
 }

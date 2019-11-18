@@ -19,13 +19,13 @@ public class Main {
 	private static int  typeSelection[] = {1,2}; 	 // tableau contenant les choix(valeurs entières) possibles de l'utilisteur
 	private static char choix = 0; 						 	 // variable de choix(caractère) utilisée dans le jeu
     private static int  selection =0;							// variable de choix(entier) utilisée dans le jeu			    
-    private static Bar bar = null;
+    private static Bar bar = new Bar();
     private static Client client= null;
     private static boolean bool;
     private static Bataille game= new Bataille();
     @SuppressWarnings("resource") 
 	private static Scanner sc = new Scanner(System.in); // instance de la classe Scanner
-	public static void main(String[] args) throws TournamentStateException,AllowedPlayerException {
+	public static void main(String[] args) throws TournamentStateException,AllowedPlayerException,NotEnoughServeurException,AlreadyChoosedException {
 		// TODO Auto-generated method stub
 
 		// programme principal  //
@@ -75,7 +75,7 @@ public class Main {
 						  try{
 							  System.out.println("ce bar n'existe pas……refais la selection");
 							  selection =sc.nextInt();  // on récupère le permier caractère
-							  bar= Utilisateur.getBarList().get(selection);
+							  bar= user.getBarList().get(selection);
 							  bool= false;
 						  	}catch(Exception e){
 						  		System.out.println(e.getMessage());
@@ -85,7 +85,7 @@ public class Main {
 						 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
 						 {
 							 try{
-								  bar= Utilisateur.getBarList().get(selection);
+								  bar= user.getBarList().get(selection);
 							  	}catch(Exception e){
 							  		System.out.println(e.getMessage());
 							  		bool =true;
@@ -94,7 +94,7 @@ public class Main {
 					}
 					while(bool);
 					
-					System.out.println("c'est donc au "+Utilisateur.getBarList().get(selection).getNom()+" que tu veux entrer…… Bon choix ");
+					System.out.println("c'est donc au "+user.getBarList().get(selection).getNom()+" que tu veux entrer…… Bon choix ");
 					System.out.println("Devine quoi…… le videur c'est un de nos potes, tu rentres et tu sors comme tu veux on a géré");
 					
 					// selecetion du personnage (client)
@@ -312,7 +312,7 @@ public class Main {
 			 }
 		}
 		while(bool);
-		barman.vendreBoisson(boisson, boisson.getQuantite(), client, client);
+		barman.vendreBoisson(boisson, boisson.getQuantite(), client, client,bar);
 	}
 	
 	/**
@@ -380,13 +380,16 @@ public class Main {
 	public static void createTournament(Bar bar)
 	{
 		int counter=0;
-		String name;
-		int winprice;
-		int participationCost;
-		String tournamentPoster;
-		ArrayList<Equipe> teamList;
-		ArrayList<Humain> playerList= null;
+		
+		String name="";
+		String teamName="";
+		int winprice=0;
+		int participationCost=0;
+		String tournamentPoster="";
+		ArrayList<Equipe> teamList= new ArrayList<Equipe>();
+		ArrayList<Humain> playerList= new ArrayList<Humain>();
 		Humain player;
+		Equipe team= new Equipe();
 		System.out.println("here we go pour la creation de ton tournoi");
 		System.out.println("de manière séquentielle on va te poser des quetions qui nous permettront de créer et d'organiser ton tournoi"
 				+ "ca va etre un petit peu long donc accroche toi");
@@ -398,10 +401,12 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println(e.getMessage()+"\n");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
 				bool= true;
 			}
 		}while(bool);
+		
+		// saisie du nom de l'équipe
 		do {
 			bool= false;
 			try{
@@ -414,6 +419,7 @@ public class Main {
 				bool= true;
 			}
 		}while(bool);
+		
 		do {
 			bool= false;
 			try{
@@ -440,61 +446,116 @@ public class Main {
 		}while(bool);
 		System.out.println("tu vas maintenant former les équipes en sélectionnant parmis les occupants du bar... allez on y va");
 		
-		
-		do{
+		for(int k =0; k < 4;k++)
+		{
+			do {
+				bool= false;
+				try{
+					
+					System.out.println("nom de l'équipe: "+k+1);
+					teamName= sc.nextLine();
+				}catch(InputMismatchException e)
+				{
+					System.out.println(e.getMessage()+"\n");
+					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					bool= true;
+				}
+			}while(bool);
+			System.out.println("le nom de cette équipe est :"+teamName);
+			System.out.println(" sélectionnes les joueurs de cette équipe parmis les occupants du bar... allez on y va");
 			
-			 bool= false;
-		 try{
-			 	bar.displayOccupantsList();
-				System.out.println("fais ton choix");
-				selection= sc.nextInt();
-				
-			}catch(InputMismatchException e)
+			for(int i=0;i < 2;i++)
 			{
-				System.out.println(e.getMessage()+"\n");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
-				bool= true;
-			}
-		}while(bool);
-		do{     											// à la sortie de ce do while j'ai forcément récupéré une tournoi disponible
-			 
-			 if(bool == true)
-			 {
-				 
-			  try{
-				  System.out.println("désolé ce tournoi existe pas ou est deja passé…… sélectionnes-en une/un autre");
-				  selection =sc.nextInt();  // on récupère le permier caractère
-				  player= bar.getOccupants().get(selection);
-				  bool= false;
-			  	}catch(Exception e){
-			  		System.out.println(e.getMessage());
-			  		bool =true;
-			  }
-			  
-			  
-			 }
-			 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
-			 {
+				do{
+					 bool= false;
 				 try{
-					 player= bar.getOccupants().get(selection);
-					 if(player.getClass().getName() == "Barman" || player.getClass().getName() == "Patronne" )
-						 throw  new AllowedPlayerException();
+					 	bar.displayOccupantsList();
+						System.out.println("fais ton choix");
+						selection= sc.nextInt();
+						
+					}catch(InputMismatchException e)
+					{
+						System.out.println(e.getMessage()+"\n");
+						sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						bool= true;
+					}
+				}while(bool);
+				do{     											// à la sortie de ce do while j'ai forcément composé une équipe potable
 					 
-					 for(int i=0;i < playerList.size();i++)
-					  {
-						  if((playerList.get(i).getClass().getName() == "ServeurHomme") || (playerList.get(i).getClass().getName() == "ServeurFemme"))
-							  counter++;
+					 if(bool == true)
+					 {
+					  try{
+						  System.out.println(" sélectionnes-en une/un autre");
+						  selection =sc.nextInt();  // on récupère le permier caractère
+						  player= bar.getOccupants().get(selection);
+						  System.out.println(player.getClass().getName());
+							 if(player.getClass().getName() == "bar.Barman" || player.getClass().getName() == "bar.Patronne" )
+								 throw  new AllowedPlayerException();
+							 if(playerList.contains(player))
+								 throw new AlreadyChoosedException();
+							 playerList.add(player);
+							 
+							 for(int j=0; j < playerList.size(); j++) // on check s'il y a toujours un serveur/serveuse de disponible
+							  {
+								  if((playerList.get(j).getClass().getName() == "bar.ServeurHomme") || (playerList.get(j).getClass().getName() == "bar.ServeurFemme"))
+									  counter++;
+							  }
+							 if(counter == 7)
+								 throw new NotEnoughServeurException();  // ou alors je throw une nouvelle exception mais flemme
+						  bool= false;
+					  	}catch(Exception e){
+					  		System.out.println(e.getMessage());
+					  		sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					  		bool =true;
 					  }
-					 if(counter == 7)
-						  bool= true;  // ou alors je throw une nouvelle exception mais flemme 
-					 
-				  	}catch(Exception e){
-				  		System.out.println(e.getMessage());
-				  		bool =true;
-				  } 
-			 }
-		}
-		while(bool);
+					  
+					  
+					 }
+					 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+					 {
+						 try{
+							 player= bar.getOccupants().get(selection);
+							 System.out.println(player.getClass().getName());
+							 if(player.getClass().getName() == "bar.Barman" || player.getClass().getName() == "bar.Patronne" )
+								 throw  new AllowedPlayerException();
+							 if(playerList.contains(player))
+								 throw new AlreadyChoosedException();
+							 playerList.add(player);
+							 
+							 for(int j=0; j < playerList.size(); j++) // on check s'il y a toujours un serveur/serveuse de disponible
+							  {
+								  if((playerList.get(j).getClass().getName() == "bar.ServeurHomme") || (playerList.get(j).getClass().getName() == "bar.ServeurFemme"))
+									  counter++;
+							  }
+							 if(counter == 7)
+								 throw new NotEnoughServeurException();  // ou alors je throw une nouvelle exception mais flemme 
+							 
+						  	}catch(Exception e){
+						  		System.out.println(e.getMessage());
+						  		sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						  		bool =true;
+						  } 
+					 }
+				}
+				while(bool);
+				System.out.println("équipe complète");
+			}// fin de la boucle for  on a une équipe complète 
+			team.setTeamName(teamName); 	// on met à jour le nom de l'équipe
+			team.setPlayerList(playerList); // on met à jour la liste des joueurs d'une équipe;
+			teamList.add(team);				// on rajoute l'equipe nouvellement constitué à la liste des équipes
+			
+		}// fin de la boucle for on a une liste de 4 équipes pour le tournoi
+		System.out.println("liste des équipes complète");
+		// on peut enfin créer un nouveau tournoi
 		
-	}
+		Tournoi tournoi = new Tournoi(name,winprice,participationCost,tournamentPoster,teamList); 
+		
+		int index= user.getBarList().indexOf(bar);
+		System.out.println("index"+index);
+		bar.getTournamentList().add(tournoi);
+		 
+		System.out.println("c'est bon ton tournoi perso a été crée.");
+	} 
+	
+	
 }

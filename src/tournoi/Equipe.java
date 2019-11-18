@@ -37,6 +37,8 @@ public class Equipe {
 		this.gain = gain;
 	}
 	
+	public Equipe()
+	{}
 	public Equipe(String name,ArrayList<Humain> playerList )
 	{
 		this.teamName= name;
