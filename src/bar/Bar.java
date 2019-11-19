@@ -198,14 +198,6 @@ public class Bar {
     public  Barman getBarman() {
         return barman;
     }
-
-    /**
-     * @return La liste des serveurs
-     */
-    public  ArrayList<Serveur> getServeurs() {
-        return serveursList;
-    }
-    
     
     /**
      * @return La liste des clients
@@ -324,7 +316,16 @@ public class Bar {
 			System.out.println(i+"- "+occupants.get(i).getPrenom());
 		}
     }
-    
+    /**
+     * affiche la liste des serveurs du bar
+     */
+    public void displayServeursList() {
+    	System.out.println("la liste des serveurs du bar ma poulette");
+    	for(int i=0;i < serveursList.size();i++)
+		{
+			System.out.println(i+"- "+serveursList.get(i).getPrenom());
+		}
+    }
     /**
      * @return La liste des occupants du bar
      */

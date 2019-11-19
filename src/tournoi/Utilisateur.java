@@ -96,6 +96,12 @@ public class Utilisateur {
 	  	ServeurHomme serveur = new ServeurHomme(prenom[i], surnom[i], 500, 5, cri[i], 10);
 	  	return serveur;
 	}
+	public ServeurHomme createServeurHomme(String name,String surname,String cri)
+	{
+		
+	  	ServeurHomme serveur = new ServeurHomme(name, surname, 500, 5, cri, 10);
+	  	return serveur;
+	}
 	public ServeurFemme automaticServeurFemme(int i)				//  méthode de création d'une serveuse femme
 	{
 		String prenom[] = {"janette","alexa","katie","beverly"};	// tableau de prénoms de serveuses
@@ -103,6 +109,12 @@ public class Utilisateur {
 		String cri[]= {"oooohh","miaouh","voix aigue","voie grave"};
 		
 	  	ServeurFemme serveur = new ServeurFemme(prenom[i], surnom[i], 500, 5, cri[i], 10);
+	  	return serveur;
+	}
+	public ServeurFemme createServeurFemme(String name,String surname,String cri)
+	{
+		
+	  	ServeurFemme serveur = new ServeurFemme(name, surname, 500, 5, cri, 10);
 	  	return serveur;
 	}
 	public ClientFemme automaticClientFemme(int i)				//  méthode de création d'une serveuse femme

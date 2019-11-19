@@ -176,9 +176,9 @@ public class Main {
 				 bool= false;
 			 try{
 				 System.out.println("Bon voici la liste des serveurs et serveuses du bar");
-					for(int i=0;i <bar.getServeurs().size();i++)
+					for(int i=0;i <bar.getServeursList().size();i++)
 					{
-						System.out.println((i)+"-"+bar.getServeurs().get(i).getSurnom());
+						System.out.println((i)+"-"+bar.getServeursList().get(i).getSurnom());
 					}
 					System.out.println("fais ton choix");
 					selection= sc.nextInt();
@@ -198,7 +198,7 @@ public class Main {
 				  try{
 					  System.out.println("désolé cette serveuse/serveur existe pas…… appelles-en une/un autre");
 					  selection =sc.nextInt();  // on récupère le permier caractère
-					  serveur= bar.getServeurs().get(selection);
+					  serveur= bar.getServeursList().get(selection);
 					  bool= false;
 				  	}catch(InputMismatchException e)
 					{
@@ -213,7 +213,7 @@ public class Main {
 				 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
 				 {
 					 try{
-						 serveur= bar.getServeurs().get(selection);
+						 serveur= bar.getServeursList().get(selection);
 					  	}catch(Exception e){
 					  		System.out.println(e.getMessage());
 					  		bool =true;
@@ -408,7 +408,114 @@ public class Main {
 	/*embaucher un nouveau serveur*/
 	public static void hireNewServer(Bar bar)
 	{
-		
+		Serveur serveur=null;
+		String serveurName="";
+		String serveurSurname="";
+		String cri="";
+		// saisie du nom du client
+				do {
+					bool= false;
+					try{
+						System.out.println("nom du/de (la) serveur/serveuse: ");
+						serveurName= sc.nextLine();
+					}catch(InputMismatchException e)
+					{
+						System.out.println("saisie incorrecte...essaie encore");
+						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						bool= true;
+					}
+				}while(bool);
+				// saisie du surnom du client
+				do {
+					bool= false;
+					try{
+						System.out.println("surnom du/de (la) serveur/serveuse: ");
+						serveurSurname= sc.nextLine();
+					}catch(InputMismatchException e)
+					{
+						System.out.println("saisie incorrecte...essaie encore");
+						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						bool= true;
+					}
+				}while(bool);
+				// saisie du cri de rage de la patronne
+				do {
+					bool= false;
+					try{
+						System.out.println("cri du/de (la) serveur/serveuse: ");
+						cri= sc.nextLine();
+					}catch(InputMismatchException e)
+					{
+						System.out.println("saisie incorrecte...essaie encore");
+						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						bool= true;
+					}
+				}while(bool);
+				System.out.println("nous avons enregistré les données du nouveau serveur à embaucher... par contre il faudra en virer un"
+						+ "on va te présenter la liste des serveurs actuels");
+				do {
+					bool= false;
+					try {
+							System.out.println("quel est le sexe du client: \n M: male \n F: femelle");
+							choix= sc.nextLine().charAt(0);
+							if(choix == 'F')
+							{
+								do {
+									bool= false;
+									try{
+										
+										bar.displayServeursList(); 				// on affiche la liste des serveurs du bar
+										selection=sc.nextInt();
+										serveur= bar.getServeursList().get(selection);
+										if(selection > bar.getServeursList().size())
+											throw new Exception();
+									}catch(InputMismatchException e)
+									{
+										System.out.println("saisie incorrecte...essaie encore ");
+										sc.nextLine();
+										bool =true;
+									}catch(Exception e)
+									{
+										System.out.println("ce serveur n'existe pas...ou a deja été viré");
+										sc.nextLine();
+										bool =true;
+									}
+								}while(bool);  // bijou sélectionné
+								bar.getServeursList().set(selection,user.createServeurHomme(serveurName, serveurSurname, cri));	// on vire(supprime) l'ancien serveur
+							}
+							else if(choix == 'M')
+							{
+								do {
+									bool= false;
+									try{
+										
+										bar.displayServeursList(); 				// on affiche la liste des serveurs du bar
+										selection=sc.nextInt();
+										serveur= bar.getServeursList().get(selection);
+										if(selection > bar.getServeursList().size())
+											throw new Exception();
+									}catch(InputMismatchException e)
+									{
+										System.out.println("saisie incorrecte...essaie encore ");
+										sc.nextLine();
+										bool =true;
+									}catch(Exception e)
+									{
+										System.out.println("ce serveur n'existe pas...ou a deja été viré");
+										sc.nextLine();
+										bool =true;
+									}
+								}while(bool);  // bijou sélectionné
+								bar.getServeursList().set(selection,user.createServeurFemme(serveurName, serveurSurname, cri));	// on vire(supprime) l'ancien serveur
+								
+								
+							}
+						}catch(InputMismatchException e)
+						{
+								sc.nextLine();
+								bool =true;
+						}
+				}while(!Arrays.toString(sexe).contains(String.valueOf(sexe)) && (choix != 'M') && (choix != 'F') && (bool));
 	}
 	/*créer un client*/
 	public static void attractNewClient(Bar bar)
@@ -747,7 +854,7 @@ public class Main {
 		
 		Tournoi tournoi = new Tournoi(name,winprice,participationCost,tournamentPoster,teamList); 
 		
-		int index= user.getBarList().indexOf(bar);
+		
 		
 		bar.getTournamentList().add(tournoi);
 		 

@@ -94,7 +94,9 @@ public abstract class Humain {
     public String getPrenom() {
         return prenom;
     }
-
+    public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
     /**
      * @return Le surnom de l'humain 
      */
@@ -247,5 +249,7 @@ public abstract class Humain {
      * 
      * @return Le bar dans lequel il se trouve
      */
+
+	
     
 }
