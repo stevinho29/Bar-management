@@ -9,5 +9,5 @@ BUT POURSUIVI : aucune fin lucrative
 VERSION ou DATE : 1.0 
 COMMENT INVOQUER CE PROJET : cloner le dépot distant  https://github.com/stevinho29/Bar-management.git
 AUTEURS : NDEMANOU STEVE 
-INSTRUCTIONS A L'USAGER : pour lancer le tournoi veuillez compiler le fichier  main.java dans la classe tournoi
+INSTRUCTIONS A L'USAGER : pour lancer le tournoi veuillez compiler le fichier  main.java dans le package tournoi
  
