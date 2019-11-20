@@ -4,17 +4,64 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import bar.Humain;
-
+/**
+ * <b>Tournoi est la classe representant un tournoi.</b><br>
+ * Un tournoi est caracterisee par :
+ * <ul>
+ * <li>Un nom</li>
+ * <li>Le prix du gagnant</li>
+ * <li>Le prix de participation</li>
+ * <li>L'affiche du tournoi</li>
+ * <li>Le statut du tournoi</li>
+ * <li>La date a� laquelle le tournoi a ete cree</li>
+ * <li>La date a� laquelle aura lieu le tournoi</li>
+ * <li>La liste des equipes qui y participent</li>
+ * </ul>
+ * 
+ * @author Steve NDEMANOU
+ * @version 1.0
+ */
 public class Tournoi {
-
-	private String name;											// nom du tournoi
-	private int winPrice; 											// prix du gagnant
-	private int participationCost;									// prix de participation
-	private String tournamentPoster;								// affiche du tournoi
-	private TournamentState state;									// statut du tournoi
-	private LocalDate TournamentCreationDate;						// data à laquelle le tournoi a été crée
-	private LocalDate dayOfTournament;								// date à laquelle aura lieu le tournoi
-	private ArrayList<Equipe> teamList= new ArrayList<Equipe>();	// liste des équipes qui y participent
+    
+    /**
+     * Le nom du tournoi
+     */
+	private String name;
+    
+    /**
+     * Le prix du gagnant
+     */
+	private int winPrice;
+    
+    /**
+     * Le prix de participation
+     */
+	private int participationCost;
+    
+    /**
+     * L'affiche du tournoi
+     */
+	private String tournamentPoster;
+    
+    /**
+     * Le statut du tournoi
+     */
+	private TournamentState state;
+    
+    /**
+     * La date a� laquelle le tournoi a ete cree
+     */
+	private LocalDate TournamentCreationDate;
+    
+    /**
+     * La date a� laquelle aura lieu le tournoi
+     */
+	private LocalDate dayOfTournament;
+    
+    /**
+     * La liste des equipes qui y participent
+     */
+	private ArrayList<Equipe> teamList= new ArrayList<Equipe>();
 	
 	/*accesseurs et mutateurs*/
 	
@@ -78,14 +125,14 @@ public class Tournoi {
 		this.dayOfTournament= LocalDate.of(currentTime.getYear()+1, currentTime.getMonth(), currentTime.getDayOfMonth());;
 		this.teamList= teamList;
 	}
-	/* méthodes utiles*/
+	/* methodes utiles*/
 	
 	public void displayTeamList()
 	{
-		System.out.println("la liste des équipes");
+		System.out.println("la liste des equipes");
 		for(int i= 0;i < teamList.size();i++)
 		{
-			System.out.println("équipe "+i+"- "+teamList.get(i).getTeamName());
+			System.out.println("equipe "+i+"- "+teamList.get(i).getTeamName());
 			ArrayList<Humain> playerList= teamList.get(i).getPlayerList();
 			for(int j=0;j < playerList.size();j++)
 				System.out.println("joueur "+j+": "+playerList.get(j).getPrenom());

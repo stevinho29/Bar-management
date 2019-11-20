@@ -9,7 +9,7 @@ public class TournamentStateException extends Exception{
 
 	public  TournamentStateException()
 	{
-		System.out.println("Ce tournoi est passé vous ne pouvez y participer");
+		System.out.println("Ce tournoi est passe vous ne pouvez y participer");
 	}
 
 }

@@ -54,7 +54,6 @@ public abstract class Client extends Humain {
         this.boissonFavorite = boissonFavorite;
         this.boissonDeSecours = boissonDeSecours;
         this.niveauAlcoolemie = niveauAlcoolemie;
-        Bar.addOccupant(this);
     }
 
     /**

@@ -33,7 +33,6 @@ public class Barman extends Humain {
      */
     public Barman(String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif) {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
-        Bar.addOccupant(this);
     }
     
     /**

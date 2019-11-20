@@ -33,8 +33,6 @@ public class Serveur extends Humain {
      */
     public Serveur(String prenom, String surnom, float porteMonnaie, int cotePopularite, String criSignificatif) {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
-        Bar.addServeurs(this);
-        Bar.addOccupant(this);
     }
 
     /** 

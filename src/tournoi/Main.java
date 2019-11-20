@@ -14,71 +14,135 @@ import bar.Humain;
 import bar.Patronne;
 import bar.Serveur;
 import bataille.Bataille;
-
+/**
+ * <b>Main est la classe principale du tournoi.</b><br>
+ * Elle est caracterisee par :
+ * <ul>
+ * <li>Une instance d'utilisateur</li>
+ * <li>Un tableau contenant les choix possibles de l'utilisteur</li>
+ * <li>Un tableau contenant les sexes possibles</li>
+ * <li>Un tableau contenant les choix (valeurs entieres) possibles de l'utilisteur</li>
+ * <li>Une variable de choix (caractere) utilisee dans le jeu</li>
+ * <li>Une variable de choix(entier) utilisee dans le jeu	</li>
+ * <li>Un bar</li>
+ * <li>Un client</li>
+ * <li>Une instance d'utilisateur</li>
+ * <li>Une bataille</li>
+ * <li>Une instance d'utilisateur</li>
+ * <li>Un L'expertise du joueur</li>
+ * <li>Une instance d'utilisateur</li>
+ * <li>Un L'expertise du joueur</li>
+ * </ul>
+ * 
+ * @author Steve NDEMANOU
+ * @version 1.0
+ */
 public class Main {
-
-	private static Utilisateur user= new Utilisateur();		// une instance d'utilisateur
-	private static char typeChoix[] = {'x','y','n','c'}; 	 // tableau contenant les choix possibles de l'utilisteur
-	private static char sexe[]= {'M','F'};					// tableau contenant les sexes possibles
-	private static int  typeSelection[] = {1,2}; 	 // tableau contenant les choix(valeurs entières) possibles de l'utilisteur
-	private static char choix = 0; 						 	 // variable de choix(caractère) utilisée dans le jeu
-    private static int  selection =0;							// variable de choix(entier) utilisée dans le jeu			    
+    
+    /**
+     * L'instance d'utilisateur
+     */
+	private static Utilisateur user= new Utilisateur();
+    
+    /**
+     * Le tableau contenant les choix possibles de l'utilisteur
+     */
+	private static char typeChoix[] = {'x','y','n','c'};
+    
+    /**
+     * Le tableau contenant les sexes possibles
+     */
+	private static char sexe[]= {'M','F'};
+    
+    /**
+     * Le tableau contenant les choix(valeurs entieres) possibles de l'utilisteur
+     */
+	private static int  typeSelection[] = {1,2}; 	 // 
+    
+    /**
+     * La variable de choix(caractere) utilisee dans le jeu
+     */
+	private static char choix = 0;
+    
+    /**
+     * La variable de choix (entier) utilisee dans le jeu
+     */
+    private static int  selection =0;
+    
+    /**
+     * Le bar
+     */
     private static Bar bar = new Bar();
+    
+    /**
+     * Le client
+     */
     private static Client client= null;
     private static boolean bool;
+    
+    /**
+     * La bataille
+     */
     private static Bataille game= new Bataille();
     @SuppressWarnings("resource") 
 	private static Scanner sc = new Scanner(System.in); // instance de la classe Scanner
-	public static void main(String[] args) throws TournamentStateException,AllowedPlayerException,NotEnoughServeurException,AlreadyChoosedException,NotAllowedValueException {
+    
+    /**
+    * Methode principale
+    * 
+    * @throws TournamentStateException
+    * @throws AllowedPlayerException
+    * @throws NotEnoughServeurException
+    * @throws AlreadyChoosedException
+    * @throws NotAllowedValueException
+    */
+	public static void main(String[] args) throws TournamentStateException, AllowedPlayerException, NotEnoughServeurException, AlreadyChoosedException, NotAllowedValueException {
 		// TODO Auto-generated method stub
 
 		// programme principal  //
-		
-		
-		
-	do {
+		do {
 			
 			System.out.println("Bonjour et Bienvenue sur notre plateforme de gestion du bar du futur");
 			System.out.println("un tas de surprises et des actions folles vous attendent... donc accrochez-vous");
 			
 			
 			
-			do { // préambule
+			do { // preambule
 				try {
-					System.out.println("à ce niveau vous avez deux choix:\n 1: soit vous entrez dans un des bar que nous possédons,\n 2: soit vous créez le votre");
-					selection =sc.nextInt();  // on récupère le permier caractère
+					System.out.println("A ce niveau vous avez deux choix:\n 1: soit vous entrez dans un des bar que nous possedons,\n 2: soit vous creez le votre");
+					selection =sc.nextInt();  // on recupere le permier caractere
 					
 				}catch(InputMismatchException e)
 				{
 					System.out.println(e.getMessage()+"\n");
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivant afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivant afin d'eviter qu'elle ne soit avalee
 				}
 				if(selection == 1) // on affiche les commandes de navigation
 				{
 					
 					System.out.println("RAVI QUE VOUS NOUS FASSIEZ CONFIANCE ");
-					System.out.println("tout d'abord on va te montrer la liste des bars disponibles");
+					System.out.println("tout d'abord nous allons te montrer la liste des bars disponibles");
 					displayBarlist();
 					do{
 						 bool= false;
 					 try{
 							System.out.println("fais ton choix: ");
-							selection =sc.nextInt();  // on récupère le permier caractère
+							selection =sc.nextInt();  // on recupere le permier caractere
 						}catch(InputMismatchException e)
 						{
 							System.out.println(e.getMessage()+"\n");
-							sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+							sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 							bool= true;
 						}
 					}while(bool);
-					do{     											// à la sortie de ce do while j'ai forcément récupéré le bar dans le quel il veut entrer
+					do{     											// à la sortie de ce do while j'ai forcement recupere le bar dans le quel il veut entrer
 						 
 						 if(bool == true)
 						 {
 							 
 						  try{
-							  System.out.println("ce bar n'existe pas……refais la selection");
-							  selection =sc.nextInt();  // on récupère le permier caractère
+							  System.out.println("ce bar n'existe pas !! refais la selection");
+							  selection =sc.nextInt();  // on recupere le permier caractere
 							  bar= user.getBarList().get(selection);
 							  bool= false;
 						  	}catch(Exception e){
@@ -86,7 +150,7 @@ public class Main {
 						  		bool =true;
 						  }
 						 }
-						 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+						 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 						 {
 							 try{
 								  bar= user.getBarList().get(selection);
@@ -98,8 +162,8 @@ public class Main {
 					}
 					while(bool);
 					
-					System.out.println("c'est donc au "+user.getBarList().get(selection).getNom()+" que tu veux entrer…… Bon choix ");
-					System.out.println("Devine quoi…… le videur c'est un de nos potes, tu rentres et tu sors comme tu veux on a géré");
+					System.out.println("c'est donc au "+user.getBarList().get(selection).getNom()+" que tu veux entrer !! Bon choix ");
+					System.out.println("Devine quoi ?? le videur c'est un de nos potes, tu rentres et tu sors comme tu veux on a gere");
 					
 					// selecetion du personnage (client)
 					
@@ -108,24 +172,24 @@ public class Main {
 					// on entre dans le bar
 					do {
 						try {
-						System.out.println("tu y es………ooh putain c'est une bombe……les serveuses sont à craquer\n……des tournois de cartes\n……la patronne qui offre des tournées………\n"
-								+ "décides-toi Mec……\nVoici une liste de ce que tu peux faire ");
+						System.out.println("tu y es!!! ooh mince c'est une bombe!!les serveuses sont a� craquer !!\n des tournois de cartes !!\\nla patronne qui offre des tournees!!!\n"
+								+ "decides-toi Mec!!\nVoici une liste de ce que tu peux faire ");
 						System.out.println("1:causer avec une serveuse/serveur\n"
 								+ "2:prendre un verre\n"
-								+ "3:participer à un tournoi\n"
-								+ "4:soyons fous……créer ton propre tournoi\n"
+								+ "3:participer a� un tournoi\n"
+								+ "4:soyons fous!!creer ton propre tournoi\n"
 								+ "5:embaucher un/une nouveau/nouvelle serveur/serveuse\n"
 								+ "6:attirer un nouveau client");
 						selection= sc.nextInt();
 						}catch( InputMismatchException e)
 						{
 							bool= true;
-							sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+							sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 							System.out.println(e.getMessage());
 						}
 						
 					}while((selection != 1) && (selection != 2) &&(selection != 3) && (selection != 4) && (selection != 5) && (selection != 6) &&(bool= true));
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					
 					switch(selection) {
 						case(1):
@@ -150,9 +214,9 @@ public class Main {
 				}
 				else if(selection == 2)
 				{
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					
-					System.out.println("Vous voulez donc créer un bar à votre image!!……………\n nous allons donc vous posez une série de question afin de réaliser votre souhait "
+					System.out.println("Vous voulez donc creer un bar a� votre image!!!!!!!\n nous allons donc vous posez une serie de question afin de realiser votre souhait "
 							+ "cela prendra une minute tout au plus ");
 					createBar();
 				}
@@ -162,11 +226,18 @@ public class Main {
 		}while(true);
 		
 	}
-	
+
+    /**
+    * Affiche la liste des bars
+    */
 	public static void displayBarlist()
 	{
 		user.displayBarList();
 	}
+	
+    /**
+    * Gere l'interaction avec les serveurs
+    */
 	public static void talkToServeurs(Bar bar)
 	{
 		Serveur serveur= null;
@@ -186,31 +257,31 @@ public class Main {
 				}catch(InputMismatchException e)
 				{
 					System.out.println(e.getMessage()+"\n");
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					bool= true;
 				}
 			}while(bool);
-			do{     											// à la sortie de ce do while j'ai forcément récupéré un serveur disponible
+			do{     											// à la sortie de ce do while j'ai forcement recupere un serveur disponible
 				 
 				 if(bool == true)
 				 {
 					 
 				  try{
-					  System.out.println("désolé cette serveuse/serveur existe pas…… appelles-en une/un autre");
-					  selection =sc.nextInt();  // on récupère le permier caractère
+					  System.out.println("desole cette serveuse/serveur n'existe pas !! appelles-en une/un autre");
+					  selection =sc.nextInt();  // on recupere le permier caractere
 					  serveur= bar.getServeursList().get(selection);
 					  bool= false;
 				  	}catch(InputMismatchException e)
 					{
 						System.out.println("saisie incorrecte");
-						sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						bool= true;
 					}catch(Exception e){
 				  		System.out.println(e.getMessage());
 				  		bool =true;
 				  }
 				 }
-				 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+				 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 				 {
 					 try{
 						 serveur= bar.getServeursList().get(selection);
@@ -228,7 +299,11 @@ public class Main {
 		    serveur.parler("que puis-je faire pour toi?");
 		    
 	}
-    public static void selectMyPerso(Bar bar)
+
+    /**
+    * Gere la selection des persos incarnables
+    */
+	public static void selectMyPerso(Bar bar)
     {
     	do{
 			
@@ -245,31 +320,31 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println(e.getMessage()+"\n");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
-		do{     											// à la sortie de ce do while j'ai forcément récupéré une boisson disponible
+		do{     											// à la sortie de ce do while j'ai forcement recupere une boisson disponible
 			 
 			 if(bool == true)
 			 {
 				 
 			  try{
-				  System.out.println("désolé ce client a quitté le bar …… sélectionnes-en une/un autre");
-				  selection =sc.nextInt();  // on récupère le permier caractère
+				  System.out.println("desole ce client a quitte le bar !! selectionnes-en une/un autre");
+				  selection =sc.nextInt();  // on recupere le permier caractere
 				  client= bar.getClientList().get(selection);
 				  bool= false;
 			  	}catch(InputMismatchException e)
 				{
 					System.out.println("saisie incorrecte");
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					bool= true;
 				}catch(Exception e){
 			  		System.out.println(e.getMessage());
 			  		bool =true;
 			  }
 			 }
-			 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+			 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 			 {
 				 try{
 					 client= bar.getClientList().get(selection);
@@ -281,21 +356,25 @@ public class Main {
 		}
 		while(bool);
 		
-		System.out.println("Nickel tu seras donc "+ client.getPrenom()+" surnommé " +client.getSurnom());
+		System.out.println("Nickel tu seras donc "+ client.getPrenom()+" surnomme " +client.getSurnom());
     }
+
+    /**
+    * Gere la commande d'une boisson
+    */
 	public static void takeAshot(Bar bar)
 	{
 		Barman barman= bar.getBarman();
 		Boisson boisson= null;
 		System.out.println("Bon le barman s'appelle"+barman.getSurnom() +"il est hyper sympa");
 		barman.presentMyself();
-		barman.parler("salut mon petit pote je te présente les boissons ok!!!");
+		barman.parler("salut mon petit pote je te presente les boissons ok!!!");
 		
 		do{
 			
-			 bool= false;
-		 try{
-			 System.out.println("Bon voici la liste des boissons que je peux te proposer");
+			bool= false;
+			try{
+				System.out.println("Bon voici la liste des boissons que je peux te proposer");
 				for(int i=0;i <bar.getInventaire().size();i++)
 				{
 					System.out.println((i)+"-"+bar.getInventaire().get(i));
@@ -306,18 +385,18 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println(e.getMessage()+"\n");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
-		do{     											// à la sortie de ce do while j'ai forcément récupéré une boisson disponible
+		do{     											// à la sortie de ce do while j'ai forcement recupere une boisson disponible
 			 
 			 if(bool == true)
 			 {
 				 
 			  try{
-				  System.out.println("désolé cette boisson existe pas…… commandes-en une/un autre");
-				  selection =sc.nextInt();  // on récupère le permier caractère
+				  System.out.println("desole cette boisson existe pas!! commandes-en une/un autre");
+				  selection =sc.nextInt();  // on recupere le permier caractere
 				  boisson= bar.getInventaire().get(selection);
 				  bool= false;
 			  	}catch(Exception e){
@@ -325,7 +404,7 @@ public class Main {
 			  		bool =true;
 			  }
 			 }
-			 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+			 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 			 {
 				 try{
 					 boisson= bar.getInventaire().get(selection);
@@ -357,35 +436,35 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println(e.getMessage()+"\n");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
-		do{     											// à la sortie de ce do while j'ai forcément récupéré une tournoi disponible
+		do{     											// à la sortie de ce do while j'ai forcement recupere une tournoi disponible
 			 
 			 if(bool == true)
 			 {
 				 
 			  try{
-				  System.out.println("désolé ce tournoi existe pas ou est deja passé…… sélectionnes-en une/un autre");
-				  selection =sc.nextInt();  // on récupère le permier caractère
+				  System.out.println("desole ce tournoi existe pas ou est deja passe!! selectionnes-en une/un autre");
+				  selection =sc.nextInt();  // on recupere le permier caractere
 				  tournoi= bar.getTournamentList().get(selection);
 				  bool= false;
 			  	}catch(InputMismatchException e)
 				{
 					System.out.println("saisie incorrecte");
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					bool= true;
 				}catch(Exception e){
 			  		System.out.println(e.getMessage());
 			  		bool =true;
 			  }
 			 }
-			 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+			 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 			 {
 				 try{
 					 tournoi= bar.getTournamentList().get(selection);
-					 if(tournoi.getState()== TournamentState.passé)
+					 if(tournoi.getState()== TournamentState.passe)
 						 throw  new TournamentStateException();
 				  	}catch(Exception e){
 				  		System.out.println(e.getMessage());
@@ -396,16 +475,19 @@ public class Main {
 		while(bool);
 		System.out.println("****************ANNONCE***************");
 		bar.getPatronne().annonceTournament(tournoi);				// la patronne annonce le tournoi
-		// on affiche la liste des équipes
+		// on affiche la liste des equipes
 		tournoi.displayTeamList();
-		// début du jeu de la bataille
+		// debut du jeu de la bataille
 		game.start();
 		// on clot le tournoi
-		tournoi.setState(TournamentState.passé);
-		//affichage des résultats
+		tournoi.setState(TournamentState.passe);
+		//affichage des resultats
 		
 	}
-	/*embaucher un nouveau serveur*/
+	
+    /**
+    * Gere l'embauche d'un nouveau serveur
+    */
 	public static void hireNewServer(Bar bar)
 	{
 		Serveur serveur=null;
@@ -421,7 +503,7 @@ public class Main {
 					}catch(InputMismatchException e)
 					{
 						System.out.println("saisie incorrecte...essaie encore");
-						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						bool= true;
 					}
 				}while(bool);
@@ -434,7 +516,7 @@ public class Main {
 					}catch(InputMismatchException e)
 					{
 						System.out.println("saisie incorrecte...essaie encore");
-						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						bool= true;
 					}
 				}while(bool);
@@ -447,12 +529,12 @@ public class Main {
 					}catch(InputMismatchException e)
 					{
 						System.out.println("saisie incorrecte...essaie encore");
-						//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						bool= true;
 					}
 				}while(bool);
-				System.out.println("nous avons enregistré les données du nouveau serveur à embaucher... par contre il faudra en virer un"
-						+ "on va te présenter la liste des serveurs actuels");
+				System.out.println("nous avons enregistre les donnees du nouveau serveur à embaucher... par contre il faudra en virer un"
+						+ "on va te presenter la liste des serveurs actuels");
 				do {
 					bool= false;
 					try {
@@ -476,11 +558,11 @@ public class Main {
 										bool =true;
 									}catch(Exception e)
 									{
-										System.out.println("ce serveur n'existe pas...ou a deja été viré");
+										System.out.println("ce serveur n'existe pas...ou a deja ete vire");
 										sc.nextLine();
 										bool =true;
 									}
-								}while(bool);  // bijou sélectionné
+								}while(bool);  // bijou selectionne
 								bar.getServeursList().set(selection,user.createServeurHomme(serveurName, serveurSurname, cri));	// on vire(supprime) l'ancien serveur
 							}
 							else if(choix == 'M')
@@ -501,11 +583,11 @@ public class Main {
 										bool =true;
 									}catch(Exception e)
 									{
-										System.out.println("ce serveur n'existe pas...ou a deja été viré");
+										System.out.println("ce serveur n'existe pas...ou a deja ete vire");
 										sc.nextLine();
 										bool =true;
 									}
-								}while(bool);  // bijou sélectionné
+								}while(bool);  // bijou selectionne
 								bar.getServeursList().set(selection,user.createServeurFemme(serveurName, serveurSurname, cri));	// on vire(supprime) l'ancien serveur
 								
 								
@@ -517,7 +599,10 @@ public class Main {
 						}
 				}while(!Arrays.toString(sexe).contains(String.valueOf(sexe)) && (choix != 'M') && (choix != 'F') && (bool));
 	}
-	/*créer un client*/
+
+    /**
+    * Gere la creation d'un nouveau client
+    */
 	public static void attractNewClient(Bar bar)
 	{
 		String clientName="";
@@ -535,7 +620,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -548,7 +633,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -561,7 +646,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -593,7 +678,7 @@ public class Main {
 								sc.nextLine();
 								bool =true;
 							}
-						}while(bool);  // bijou sélectionné
+						}while(bool);  // bijou selectionne
 						switch(selection) {
 						
 											case(1):
@@ -629,7 +714,7 @@ public class Main {
 								sc.nextLine();
 								bool =true;
 							}
-						}while(bool);		// couleur sélectionnée
+						}while(bool);		// couleur selectionnee
 						
 						switch(selection) {
 												case(1):
@@ -658,7 +743,10 @@ public class Main {
 		else
 			bar.getOccupants().add(user.createClientFemme(clientName, clientSurname, cri, bijou));
 	}
-	/*créer un tournoi*/
+	
+    /**
+    * Gere la creation d'un tournoi
+    */
 	public static void createTournament(Bar bar)
 	{
 		int counter=0;
@@ -674,7 +762,7 @@ public class Main {
 		Humain player;
 		Equipe team= new Equipe();
 		System.out.println("here we go pour la creation de ton tournoi");
-		System.out.println("de manière séquentielle on va te poser des quetions qui nous permettront de créer et d'organiser ton tournoi"
+		System.out.println("de maniere sequentielle on va te poser des quetions qui nous permettront de creer et d'organiser ton tournoi"
 				+ "ca va etre un petit peu long donc accroche toi");
 		// saisie du nom du tournoi
 		do {
@@ -685,11 +773,11 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}catch(Exception e)
 			{
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -700,11 +788,11 @@ public class Main {
 			try{
 				System.out.println("prix du gagnant: ");
 				winprice= sc.nextInt();
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -714,11 +802,11 @@ public class Main {
 			try{
 				System.out.println("cout de participation: ");
 				participationCost= sc.nextInt();
-				sc.nextLine();					 			// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine();					 			// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			} 
 		}while(bool);
@@ -732,11 +820,11 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
-		System.out.println("tu vas maintenant former les équipes en sélectionnant parmis les occupants du bar... allez on y va");
+		System.out.println("tu vas maintenant former les equipes en selectionnant parmis les occupants du bar... allez on y va");
 		
 		for(int k =0; k < 4;k++)
 		{
@@ -744,17 +832,17 @@ public class Main {
 				bool= false;
 				try{
 					
-					System.out.println("nom de l'équipe: "+k+1);
+					System.out.println("nom de l'equipe: "+k+1);
 					teamName= sc.nextLine();
 				}catch(InputMismatchException e)
 				{
 					System.out.println("saisie incorrecte...essaie encore");
-					sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					bool= true;
 				}
 			}while(bool);
-			System.out.println("le nom de cette équipe est :"+teamName);
-			System.out.println(" sélectionnes les joueurs de cette équipe parmis les occupants du bar... allez on y va");
+			System.out.println("le nom de cette equipe est :"+teamName);
+			System.out.println(" selectionnes les joueurs de cette equipe parmis les occupants du bar... allez on y va");
 			
 			for(int i=0;i < 2;i++)
 			{
@@ -768,17 +856,17 @@ public class Main {
 					}catch(InputMismatchException e)
 					{
 						System.out.println("saisie incorrecte...essaie encore");
-						sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						bool= true;
 					}
 				}while(bool);
-				do{     											// à la sortie de ce do while j'ai forcément composé une équipe potable
+				do{     											// à la sortie de ce do while j'ai forcement compose une equipe potable
 					 
 					 if(bool == true)
 					 {
 					  try{
-						  System.out.println(" sélectionnes-en une/un autre");
-						  selection =sc.nextInt();  // on récupère le permier caractère
+						  System.out.println(" selectionnes-en une/un autre");
+						  selection =sc.nextInt();  // on recupere le permier caractere
 						  player= bar.getOccupants().get(selection);
 						  System.out.println(player.getClass().getName());
 							 if(player.getClass().getName() == "bar.Barman" || player.getClass().getName() == "bar.Patronne" )
@@ -798,22 +886,22 @@ public class Main {
 					  	}catch(InputMismatchException e)
 					  {
 					    	System.out.println("saisie incorrecte...essaie encore");
-					    	sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					    	sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					  		bool =true;
 					  }catch(IndexOutOfBoundsException e)
 					  {
-					    	System.out.println("ce client a quitté le bar sélectionnes-en une/un autre");
-					    	sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					    	System.out.println("ce client a quitte le bar selectionnes-en une/un autre");
+					    	sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					  		bool =true;
 					  }catch(Exception e){
 					  		System.out.println(e.getMessage());
-					  		sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+					  		sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 					  		bool =true;
 					    }
 					  
 					  
 					 }
-					 else	// ne s'exécute qu'une seule fois si tout est bon on sort du while sinn 
+					 else	// ne s'execute qu'une seule fois si tout est bon on sort du while sinn 
 					 {
 						 try{
 							 player= bar.getOccupants().get(selection);
@@ -834,23 +922,23 @@ public class Main {
 							 
 						  	}catch(Exception e){
 						  		System.out.println(e.getMessage());
-						  		sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+						  		sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 						  		bool =true;
 						  } 
 					 }
 				}
 				while(bool);
-				System.out.println("équipe complète");
-			}// fin de la boucle for  on a une équipe complète 
-			team.setTeamName(teamName); 	// on met à jour le nom de l'équipe
+				System.out.println("equipe complete");
+			}// fin de la boucle for  on a une equipe complete 
+			team.setTeamName(teamName); 	// on met à jour le nom de l'equipe
 			System.out.println(usefulList.get(0));
 			System.out.println(usefulList.get(1));
-			team.setPlayerList(usefulList); // on met à jour la liste des joueurs d'une équipe;
-			teamList.add(team);				// on rajoute l'equipe nouvellement constitué à la liste des équipes
+			team.setPlayerList(usefulList); // on met à jour la liste des joueurs d'une equipe;
+			teamList.add(team);				// on rajoute l'equipe nouvellement constitue à la liste des equipes
 			usefulList.clear(); 			// on vide la liste utile
-		}// fin de la boucle for on a une liste de 4 équipes pour le tournoi
-		System.out.println("liste des équipes complète");
-		// on peut enfin créer un nouveau tournoi
+		}// fin de la boucle for on a une liste de 4 equipes pour le tournoi
+		System.out.println("liste des equipes complete");
+		// on peut enfin creer un nouveau tournoi
 		
 		Tournoi tournoi = new Tournoi(name,winprice,participationCost,tournamentPoster,teamList); 
 		
@@ -858,9 +946,12 @@ public class Main {
 		
 		bar.getTournamentList().add(tournoi);
 		 
-		System.out.println("c'est bon ton tournoi perso a été crée.");
+		System.out.println("c'est bon ton tournoi perso a ete cree.");
 	} 
-	/*créer un bar*/
+	
+    /**
+    * Gere la creation d'un bar
+    */
 	public static void createBar()
 	{
 
@@ -876,7 +967,7 @@ public class Main {
 		ArrayList<Humain> occupantsList= new ArrayList<Humain>();
 		
 		for(int i =0;i < serveurList.size();i++)
-			occupantsList.add(i, serveurList.get(i));   			// par covariance des variables je peux peux stocker une variable fille dans une variable mère
+			occupantsList.add(i, serveurList.get(i));   			// par covariance des variables je peux peux stocker une variable fille dans une variable mere
 		for(int i=0; i< clientsList.size();i++)
 			occupantsList.add(i, clientsList.get(i));
 	
@@ -892,7 +983,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -905,7 +996,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -918,7 +1009,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -931,7 +1022,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -944,7 +1035,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -957,7 +1048,7 @@ public class Main {
 			}catch(InputMismatchException e)
 			{
 				System.out.println("saisie incorrecte...essaie encore");
-				//sc.nextLine(); 								// on replace la tete de lecture au début de la ligne suivante afin d'éviter qu'elle ne soit avalée
+				//sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 				bool= true;
 			}
 		}while(bool);
@@ -970,7 +1061,7 @@ public class Main {
 
 		Bar myBar= new Bar(barName,patronne,barmaid,inventaire,serveurList,occupantsList,clientsList);
 		user.getBarList().add(myBar);
-		System.out.println("c'est bon ton BAR perso a été crée.");
+		System.out.println("c'est bon ton BAR perso a ete cree.");
 	}
 	
 }
