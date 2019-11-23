@@ -64,48 +64,80 @@ public class Tournoi {
 	private ArrayList<Equipe> teamList= new ArrayList<Equipe>();
 	
 	/*accesseurs et mutateurs*/
+
 	
+    /**
+     * @return Le nom du tournoi
+     */
 	public String getName() {
 		return this.name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+    /**
+     * @return Le prix du gagnant
+     */
 	public int getWinPrice() {
 		return winPrice;
 	}
 	public void setWinPrice(int winPrice) {
 		this.winPrice = winPrice;
 	}
+	
+    /**
+     * @return Le prix de participation
+     */
 	public int getParticipationCost(){
 		return participationCost;
 	}
 	public void setParticipationCost(int participationCost){
 		this.participationCost = participationCost;
 	}
+	
+    /**
+     * @return L'affiche du tournoi
+     */
 	public String getTournamentPoster(){
 		return tournamentPoster;
 	}
 	public void setTournamentPoster(String tournamentPoster) {
 		this.tournamentPoster = tournamentPoster;
 	}
+
 	
+    /**
+     * @return La date de creation du tournoi
+     */
 	public LocalDate getTournamentCreationDate() {
 		return TournamentCreationDate;
 	}
+	
+    /**
+     * @return Le statut du tournoi
+     */
 	public TournamentState getState() {
 		return state;
 	}
 	public void setState(TournamentState state) {
 		this.state = state;
 	}
+	
+    /**
+     * @return La date a laquelle aura lieu le tournoi
+     */
 	public LocalDate getDayOfTournament() {
 		return dayOfTournament;
 	}
 	public void setDayOfTournament(LocalDate dayOfTournament) {
 		this.dayOfTournament = dayOfTournament;
 	}
+
 	
+    /**
+     * @return a liste des equipes
+     */
 	public ArrayList<Equipe> getTeamList() {
 		return teamList;
 	}
@@ -121,7 +153,7 @@ public class Tournoi {
 		this.winPrice= winprice;
 		this.tournamentPoster= tournamentPoster;
 		this.TournamentCreationDate= LocalDateTime.now().toLocalDate();
-		this.state = TournamentState.à_venir;
+		this.state = TournamentState.a_venir;
 		this.dayOfTournament= LocalDate.of(currentTime.getYear()+1, currentTime.getMonth(), currentTime.getDayOfMonth());;
 		this.teamList= teamList;
 	}

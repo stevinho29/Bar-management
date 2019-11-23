@@ -84,7 +84,7 @@ public class Fournisseur extends Humain {
         commandeBoissons.forEach((boisson) -> {
             //malus de la quantite fournie sur le stock
             boisson.setQuantite(boisson.getQuantite() + quantiteParCommande);
-            parler("Voila� " + quantiteParCommande + " Litres de " + boisson.getNom() + " pour votre bar !");
+            parler("Voila " + quantiteParCommande + " Litres de " + boisson.getNom() + " pour votre bar !");
         });
         //recuperation du paiement
         if (prixCommande == 0)
@@ -94,7 +94,7 @@ public class Fournisseur extends Humain {
         this.setPorteMonnaie(porteMonnaie + prixCommande);
         prixCommande = 0;
     }
-
+    
     /**
      * Retourne une chaine de caractere caracterisant le fournisseur
      * 
@@ -104,11 +104,5 @@ public class Fournisseur extends Humain {
     public void parler(String message) {
         super.parler("Fournisseur : " +message);
     }
-    
-    /**
-     * Determine le bar dont il est le fournisseur
-     * 
-     * @return le bar dont il est le fournisseur
-     */
-     
+
 }

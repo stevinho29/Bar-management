@@ -415,7 +415,7 @@ public class Bar {
 	}
 	
 	/**
-	 * Ajout de tournoi a� liste
+	 * Ajout de tournoi a la liste
 	 */
 	public void addTournament()	
 	{
@@ -436,7 +436,7 @@ public class Bar {
     /**
      * 
      */
-    public void addTeam() 				// a� voir au niveau de la classe equipe ou tournoi
+    public void addTeam() 				// a voir au niveau de la classe equipe ou tournoi
     {
     	
     }
@@ -456,7 +456,7 @@ public class Bar {
 	/**
 	 * 
 	 */
-	public void addPlayer()				// a� voir au niveau de la classe equipe ou tournoi
+	public void addPlayer()				// a voir au niveau de la classe equipe ou tournoi
 	{
 		
 	}

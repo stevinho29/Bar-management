@@ -104,7 +104,7 @@ public class Patronne extends ClientFemme implements Proprietaire{
      */
     public void annonceTournament(Tournoi tournoi)
     {
-     System.out.println("dÃ©but du tournoi "+tournoi.getTournamentPoster()+" le prix du vainqueur sera de"+tournoi.getWinPrice());
+     System.out.println("début du tournoi "+tournoi.getTournamentPoster()+" le prix du vainqueur sera de"+tournoi.getWinPrice());
      
      tournoi.setState(TournamentState.en_cours);
      

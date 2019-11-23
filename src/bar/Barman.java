@@ -21,7 +21,7 @@ import tournoi.*;
  * @version 1.0
  */
 public class Barman extends Humain {
-    
+	
     /**
      * Constructeur Barman
      * 
@@ -75,7 +75,7 @@ public class Barman extends Humain {
     }
     
     /**
-     * Commande de boissons pour remplir celles qui sont �puis�es
+     * Commande de boissons pour remplir celles qui sont epuises
      * 
      * @param fournisseur
      */
@@ -93,9 +93,8 @@ public class Barman extends Humain {
             fournisseur.livrerBoissons();
         }
     }
-    
-   
-
+	
+	
     /**
      * Se payer de la boisson 
      * 
@@ -105,7 +104,7 @@ public class Barman extends Humain {
     public void payer(Boisson boisson, int quantite,Bar bar) {
         setContenuVerre(getContenuVerre() + quantite);//servir la quantite necessaire dans son verre
         setBoissonVerre(boisson);//indiquer la boisson servie dans le verre
-        parler("Voilà " + quantite + " Litres de " + boisson.getNom() + " pour moi le Barman !");
+        parler("Voila " + quantite + " Litres de " + boisson.getNom() + " pour moi le Barman !");
         // Il ne paye pas :  pas de debit sur son compte
     }
 

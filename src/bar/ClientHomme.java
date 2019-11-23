@@ -79,7 +79,7 @@ public class ClientHomme extends Client {
     @Override
     public void parler(String message) {//message adresse Ã  tous
         if (this.niveauAlcoolemie > 10)
-           super.parler(message + " Poupee");
+           super.parler(message + " Poupée");
         else
             super.parler(message);
     }

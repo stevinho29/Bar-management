@@ -3,9 +3,9 @@ package tournoi;
 public enum TournamentState {
 
 	//Objets directement construits
-	 passé("passé"), 			// statut du tournoi
+	 passe("passe"), 			// statut du tournoi
 	  en_cours ("en cours"), 	// 
-	  à_venir("à venir");		// 
+	  a_venir("a venir");		// 
 
 	 
 	  

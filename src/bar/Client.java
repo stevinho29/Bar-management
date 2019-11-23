@@ -32,7 +32,7 @@ public abstract class Client extends Humain {
     protected Boisson boissonDeSecours;
     
     /**
-     * Le niceau d'alcoolemie du client
+     * Le niveau d'alcoolemie du client
      */
     protected int niveauAlcoolemie;
 

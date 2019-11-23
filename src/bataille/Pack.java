@@ -2,42 +2,95 @@ package bataille;
 
 import java.util.ArrayList;
 
+/**
+ * <b>Pack est la classe representant un pack de cartes.</b><br>
+ * Pack est carcterisee par :
+ * <ul>
+ * <li>Un jeu de 32 cartes</li>
+ * <li>Un jeu de 52 cartes</li>
+ * <li>Un paquet de cartes</li>
+ * <li>Une carte</li>
+ * </ul>
+ * 
+ * @author Steve NDEMANOU
+ * @version 1.0
+ */
 public class Pack  {
 
 	private NumberOfCard number32 ;
 	private NumberOfCard number52 ;
-	private ArrayList<Cart> pack= new ArrayList<Cart>(); // on défini une collection (un paquet de carte)
+	private ArrayList<Cart> pack= new ArrayList<Cart>(); // on defini une collection (un paquet de carte)
 	private Cart cart = new Cart(); 					 // on instancie une carte de notre jeu
-
 	
+	/**
+     * @return Le jeu de 32 cartes
+     */
 	public NumberOfCard getNumber32() {
 		return number32;
 	}
+	
+    /**
+     * Modifie le jeu de 32 cartes
+     * 
+     * @param number32
+     */
 	public void setNumber32(NumberOfCard number32) {
 		this.number32 = number32;
 	}
 	
+	/**
+     * @return Le jeu de 52 cartes
+     */
 	public NumberOfCard getNumber52() {
 		return number52;
 	}
+	
+    /**
+     * Modifie le jeu de 52 cartes
+     * 
+     * @param number52
+     */
 	public void setNumber52(NumberOfCard number52) {
 		this.number52 = number52;
 	}
 	
+	/**
+     * @return Le pack
+     */
 	public ArrayList<Cart> getPack() {
 		return pack;
 	}
+	
+    /**
+     * Modifie le pack
+     * 
+     * @param pack
+     */
 	public void setPack(ArrayList<Cart> pack) {
 		this.pack = pack;
 	}
-
+	
+	/**
+     * @return Une carte
+     */
 	public Cart getCart() {
 		return cart;
 	}
+	
+    /**
+     * Modifie la carte
+     * 
+     * @param cart
+     */
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
 
+	/**
+	 * Constructeur de Pack
+	 * 
+	 * @param number
+	 */
 	public Pack(int number)
 	{
 		if(number == 32)
@@ -46,7 +99,9 @@ public class Pack  {
 			populatePack52(this.pack);
 	}
 	
-	// on remplie la liste des cartes quand il s'agit d'un jeu de 32 OU 52 Cartes
+	/**
+     * Remplissage de la liste des cartes pour un jeu de 32 cartes
+     */
 	public void populatePack32(ArrayList<Cart> pack) 
 	{
 		pack.add(new Cart(CardDesignation.un,Figure.carreau));  //1
@@ -90,6 +145,10 @@ public class Pack  {
 		pack.add(new Cart(CardDesignation.treize,Figure.pique));  //13
 		
 	}
+	
+	/**
+     * Remplissage de la liste des cartes pour un jeu de 52 cartes
+     */
 	public void populatePack52(ArrayList<Cart>pack)
 	{
 		
@@ -159,9 +218,6 @@ public class Pack  {
 		pack.add(new Cart(CardDesignation.treize,Figure.treffle));  //13
 		pack.add(new Cart(CardDesignation.treize,Figure.pique));  //13
 		
-		
-		
 	}
 	
-
 }

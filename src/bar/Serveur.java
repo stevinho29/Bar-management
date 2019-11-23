@@ -59,11 +59,4 @@ public class Serveur extends Humain {
     public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir,Bar bar) {
         bar.getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir,bar);
     }
-    
-    /**
-     * Recuperation du bar dans lequel le serveur se trouve
-     * @return Le bar
-     */
-    
-    
 }
