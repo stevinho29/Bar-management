@@ -95,7 +95,7 @@ public class Barman extends Humain {
     }
 	
 	
-    /**
+    /** 
      * Se payer de la boisson 
      * 
      * @see bar.Humain#payer(bar.Boisson, int)
