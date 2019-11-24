@@ -38,10 +38,20 @@ public class ServeurHomme extends Serveur {
         super(prenom, surnom, porteMonnaie, cotePopularite, criSignificatif);
         this.tailleBiceps = tailleBiceps;
     }
-
+    
     /**
      * Servir de la boisson a la demande d'un client
      * A lui-meme ou un autre
+     * 
+     * @see bar.Serveur#servirClient(bar.Boisson, int, bar.Humain, bar.Humain)
+     */
+    @Override
+    public void servirClient(Boisson boisson, int quantite, Humain clientADebiter, Humain clientAServir,Bar bar) {
+        bar.getBarman().vendreBoisson(boisson, quantite, clientADebiter, clientAServir,bar);
+    }
+
+    /**
+     * Retourne une chaine de caractere caracterisant le serveur
      * 
      * @see java.lang.Object#toString()
      */
