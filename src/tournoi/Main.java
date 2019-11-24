@@ -172,11 +172,11 @@ public class Main {
 					// on entre dans le bar
 					do {
 						try {
-							System.out.println("tu y es!!! ooh mince c'est une bombe!!les serveuses sont a  craquer !!\n des tournois de cartes !!\\nla patronne qui offre des tournees!!!\n"
+							System.out.println("tu y es!!! ooh mince c'est une bombe!!les serveuses sont Ã  craquer !!\n des tournois de cartes !!\\nla patronne qui offre des tournees!!!\n"
 									+ "decides-toi Mec!!\nVoici une liste de ce que tu peux faire ");
 							System.out.println("1:causer avec une serveuse/serveur\n"
 									+ "2:prendre un verre\n"
-									+ "3:participer a  un tournoi\n"
+									+ "3:participer Ã  un tournoi\n"
 									+ "4:soyons fous!!creer ton propre tournoi\n"
 									+ "5:embaucher un/une nouveau/nouvelle serveur/serveuse\n"
 									+ "6:attirer un nouveau client");
@@ -216,7 +216,7 @@ public class Main {
 				{
 					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
 
-					System.out.println("Vous voulez donc creer un bar a  votre image!!!!!!!\n nous allons donc vous posez une serie de question afin de realiser votre souhait "
+					System.out.println("Vous voulez donc creer un bar Ã  votre image!!!!!!!\n nous allons donc vous posez une serie de question afin de realiser votre souhait "
 							+ "cela prendra une minute tout au plus ");
 					createBar();
 				}

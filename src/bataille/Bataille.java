@@ -18,9 +18,9 @@ public class Bataille {
 		Scanner sc = new Scanner(System.in); // instance de la classe Scanner
 
 
-		// fonctionnalites a  rajouter:
+		// fonctionnalites aï¿½ rajouter:
 		/*
-		 * 	passer le jeu a  tout  moment  
+		 * 	passer le jeu aï¿½ tout  moment  
 		 *  jouer contre l'ordinateur OK
 		 *  jouer contre un autre joueur OK 
 		 */		
@@ -33,10 +33,10 @@ public class Bataille {
 
 		System.out.println("Bienvenue sur l'interface du jeu de la bataille");
 		System.out.println("Pour la navigation dans le jeu les commandes sont les suivantes \n arreter la partie : x \n confirmer : y \n refuser: n \n afficher les commandes de navigation : c ");
-		do { // preambule
+		do { // preambule	
 			try {
 				System.out.println(" voulez-vous commencer une partie ? :");
-				choix =sc.nextLine().charAt(0);  // on recupa¨re le permier caracta¨re
+				choix =sc.nextLine().charAt(0);  // on recupaï¿½re le permier caractaï¿½re
 			}catch(Exception e)
 			{
 				System.out.println(e.getMessage()+"\n");
@@ -45,42 +45,48 @@ public class Bataille {
 				System.out.println("Pour la navigation dans le jeu les commandes sont les suivantes \n arreter la partie : x \n confirmer : y \n refuser: n \n afficher les commandes de navigation : c ");
 
 		}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && (choix != 'x') && (choix !='y'));
-
-		do { // on commence le jeu 
-
-			do { // selection du nombre de cartes du jeu
-				try {
-					System.out.println("un jeu de 32 ou de 52 ?: \n 32 : y \n 52 : n");
-					choix =sc.nextLine().charAt(0);  // on recupere le permier caractere
-				}catch(Exception e)
-				{
-					System.out.println(e.getMessage());
-				}
-			}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x' && choix != 'y' && choix != 'n');
-
-			/////////////////////////////////////////////////////////////////////////////////////
-			pack= selectPack(pack,choix);
-			/////////////////////////////////////////////////////////////////////////////////////	
-
-			do { // selection du mode de jeu ( vs player or  vs bot)
-				try {
-					System.out.println("contre un bot ou real player ?: \n bot : y \n player : n");
-					choix =sc.nextLine().charAt(0);  // on recupa¨re le permier caracta¨re
-				}catch(Exception e)
-				{
-					System.out.println(e.getMessage());
-				}
-			}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x' && choix != 'y' && choix != 'n');
-
-			/////////////////////////////////////////////////////////////////////////////////
-			selectMode(pack,choix);
-
-			/////////////////////////////////////////////////////////////////////
-
-		}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x');
-
-		System.out.println("Bataille terminee\n\n");
-		//}while(true);
+		if(choix == 'y')
+		{
+				do { // on commence le jeu 
+		
+					do { // selection du nombre de cartes du jeu
+						try {
+							System.out.println("un jeu de 32 ou de 52 ?: \n 32 : y \n 52 : n");
+							choix =sc.nextLine().charAt(0);  // on recupere le permier caractere
+						}catch(Exception e)
+						{
+							System.out.println(e.getMessage());
+						}
+					}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x' && choix != 'y' && choix != 'n');
+					
+					if( choix != 'x')
+					{
+						/////////////////////////////////////////////////////////////////////////////////////
+						pack= selectPack(pack,choix);
+						/////////////////////////////////////////////////////////////////////////////////////	
+			
+						do { // selection du mode de jeu ( vs player or  vs bot)
+							try {
+								System.out.println("contre un bot ou real player ?: \n bot : y \n player : n");
+								choix =sc.nextLine().charAt(0);  // on recupaï¿½re le permier caractaï¿½re
+							}catch(Exception e)
+							{
+								System.out.println(e.getMessage());
+							}
+						}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x' && choix != 'y' && choix != 'n');
+			
+						if(choix != 'x')
+						/////////////////////////////////////////////////////////////////////////////////
+						selectMode(pack,choix);
+			
+						/////////////////////////////////////////////////////////////////////
+					}
+		
+				}while(!Arrays.toString(typeChoix).contains(String.valueOf(choix)) && choix != 'x');
+		
+				System.out.println("Bataille terminee\n\n");
+		}
+	//}while(choix != 'x');
 
 	}
     
@@ -150,7 +156,7 @@ public class Bataille {
 	public static void versusBot(Pack pack,int nbCartes)
 	{
 
-
+		boolean bool;
 		int carte=0;							 // carte selectionnee
 		final ArrayList<Integer> t1 = new ArrayList<Integer>(); 				 // tableau 1
 		int  firstPlayerResult= 0; 				 // nombre de points du 1er joueur
@@ -160,19 +166,34 @@ public class Bataille {
 
 		for(int i= 0;i < middle;i++ )
 		{
-			do {	
+			do {	bool= false;
 				try {
 					System.out.println("choisissez une carte parmis vos "+ (middle - t1.size())+" cartes restantes: ");
-					carte= sc.nextInt(); 					  // on recupa¨re la saisie du joueur
+					carte= sc.nextInt(); 					  // on recupaï¿½re la saisie du joueur
+					if(carte >= 16)
+						throw new IndexOutOfBoundsException();
+				}catch(IndexOutOfBoundsException e)
+				{
+					System.out.println("cette carte n'existe pas... pique en une autre");
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+					bool= true;
 				}catch(Exception e)
 				{
 					System.out.println(e.getMessage());
+					sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+					bool= true;
 				}
-				if(t1.contains(Integer.valueOf(carte)))
-					System.out.println("Cette carte a deja ete selectionnee");
-				else
-					System.out.println("vous avez choisi la carte "+ pack.getPack().get(carte).getNumber().getCardDesignation()+" de "+pack.getPack().get(carte).getFigure());
-			}while(t1.contains(Integer.valueOf(carte))); // tant que la carte selectionnee a deja ete selectionnee
+				if(!bool)
+				{
+					if(t1.contains(Integer.valueOf(carte)))
+					{
+						System.out.println("Cette carte a deja ete selectionnee");
+						bool=true;
+					}
+					else
+						System.out.println("vous avez choisi la carte "+ pack.getPack().get(carte).getNumber().getCardDesignation()+" de "+pack.getPack().get(carte).getFigure());
+				}
+			}while(bool); // tant que la carte selectionnee a deja ete selectionnee
 			t1.add(carte);  							 // on sauvegarde la carte selectionnee pour le prochain tour
 
 			//System.out.println("valeur du tableau de rentention "+ t1.get(i));
@@ -218,7 +239,7 @@ public class Bataille {
 			System.out.println(" le joueur numero 1 a "+ firstPlayerResult+" points");
 		}
 		else
-			System.out.println(" Vous terminez a  egalite");
+			System.out.println(" Vous terminez aï¿½ egalite");
 	}
 	
 	/**
@@ -229,6 +250,7 @@ public class Bataille {
      */
 	public static void versusPlayer(Pack pack,int nbCartes)
 	{
+		boolean bool;
 		int carte1=0;							 // carte joueur 1 selectionnee
 		int carte2=0;							 // carte joueur 2 selectionnee
 		final ArrayList<Integer> t1 = new ArrayList<Integer>(); 				 // tableau 1
@@ -240,37 +262,69 @@ public class Bataille {
 
 		for(int i= 0;i < middle;i++ )
 		{
-			////////////////////////////////////// joueur 2 ///////////////////////////////////////////
+			////////////////////////////////////// joueur 1 ///////////////////////////////////////////
 			do {	
-				try{
-					System.out.println("1 er joueur choisissez une carte parmis vos "+ (middle - t1.size())+" cartes restantes: ");
-					carte1= sc.nextInt(); 					  // on recupa¨re la saisie du joueur
-				}catch(Exception e)
-				{
-					System.out.println(e.getMessage());
-				}
+				bool= false;
+			try {
+				System.out.println("Joueur 1 choisissez une carte parmis vos "+ (middle - t1.size())+" cartes restantes: ");
+				carte1= sc.nextInt(); 					  // on recupaï¿½re la saisie du joueur
+				if(carte1 >= 16)
+					throw new IndexOutOfBoundsException();
+			}catch(IndexOutOfBoundsException e)
+			{
+				System.out.println("cette carte n'existe pas... pique en une autre");
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+				bool= true;
+			}catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+				bool= true;
+			}
+			if(!bool)
+			{
 				if(t1.contains(Integer.valueOf(carte1)))
+				{
 					System.out.println("Cette carte a deja ete selectionnee");
+					bool=true;
+				}
 				else
 					System.out.println("vous avez choisi la carte "+ pack.getPack().get(carte1).getNumber().getCardDesignation()+" de "+pack.getPack().get(carte1).getFigure());
-			}while(t1.contains(Integer.valueOf(carte1))); // tant que la carte selectionnee a deja ete selectionnee
-			t1.add(carte1);  							      // on sauvegarde la carte selectionnee pour le prochain tour
+			}
+		}while(bool); // tant que la carte selectionnee a deja ete selectionnee
+		t1.add(carte1);  							 // on sauvegarde la carte selectionnee pour le prochain tour
 
 			////////////////////////////////////// joueur 2 ///////////////////////////////////////////
 			do {	
-				try{
-					System.out.println("2 eme joueur choisissez une carte parmis vos "+ (middle - t2.size())+" cartes restantes: ");
-					carte2= sc.nextInt(); 					  // on recupa¨re la saisie du joueur
-				}catch(Exception e)
-				{
-					System.out.println(e.getMessage());
-				}
+				bool= false;
+			try {
+				System.out.println("Joueur 2 choisissez une carte parmis vos "+ (middle - t2.size())+" cartes restantes: ");
+				carte2= sc.nextInt(); 					  // on recupaï¿½re la saisie du joueur
+				if(carte2 >= 16)
+					throw new IndexOutOfBoundsException();
+			}catch(IndexOutOfBoundsException e)
+			{
+				System.out.println("cette carte n'existe pas... pique en une autre");
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+				bool= true;
+			}catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+				sc.nextLine(); 								// on replace la tete de lecture au debut de la ligne suivante afin d'eviter qu'elle ne soit avalee
+				bool= true;
+			}
+			if(!bool)
+			{
 				if(t2.contains(Integer.valueOf(carte2)))
+				{
 					System.out.println("Cette carte a deja ete selectionnee");
+					bool=true;
+				}
 				else
-					System.out.println("vous avez choisi la carte "+ pack.getPack().get(carte2).getNumber().getCardDesignation()+" de "+pack.getPack().get(carte2).getFigure());
-			}while(t2.contains(Integer.valueOf(carte2))); // tant que la carte selectionnee a deja ete selectionnee
-			t2.add(carte2);  							 // on sauvegarde la carte selectionnee pour le prochain tour
+					System.out.println("vous avez choisi la carte "+ pack.getPack().get(middle + carte2).getNumber().getCardDesignation()+" de "+pack.getPack().get(middle + carte2).getFigure());
+			}
+		}while(bool); // tant que la carte selectionnee a deja ete selectionnee
+		t1.add(carte2);  							 // on sauvegarde la carte selectionnee pour le prochain tour
 
 			//System.out.println("valeur du tableau de rentention "+ t1.get(i));
 
@@ -315,7 +369,7 @@ public class Bataille {
 			System.out.println(" le joueur numero 1 a "+ firstPlayerResult+" points");
 		}
 		else
-			System.out.println(" Vous terminez a  egalite");
+			System.out.println(" Vous terminez aï¿½ egalite");
 	}
 
 }

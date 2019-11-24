@@ -13,8 +13,8 @@ import bar.Humain;
  * <li>Le prix de participation</li>
  * <li>L'affiche du tournoi</li>
  * <li>Le statut du tournoi</li>
- * <li>La date a  laquelle le tournoi a ete cree</li>
- * <li>La date a  laquelle aura lieu le tournoi</li>
+ * <li>La date a laquelle le tournoi a ete cree</li>
+ * <li>La date a laquelle aura lieu le tournoi</li>
  * <li>La liste des equipes qui y participent</li>
  * </ul>
  * 
@@ -49,12 +49,12 @@ public class Tournoi {
 	private TournamentState state;
     
     /**
-     * La date a  laquelle le tournoi a ete cree
+     * La date Ã  laquelle le tournoi a ete cree
      */
 	private LocalDate TournamentCreationDate;
     
     /**
-     * La date a  laquelle aura lieu le tournoi
+     * La date Ã  laquelle aura lieu le tournoi
      */
 	private LocalDate dayOfTournament;
     
