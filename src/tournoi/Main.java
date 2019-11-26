@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import bar.Bar;
 import bar.Barman;
@@ -86,7 +90,12 @@ public class Main {
 	private static Bataille game= new Bataille();
 	@SuppressWarnings("resource") 
 	private static Scanner sc = new Scanner(System.in); // instance de la classe Scanner
-
+	
+	//Nous déclarons nos objets en dehors du bloc try/catch
+	/*
+	 * private static FileOutputStream fos; private static byte[] buf = new byte[8];
+	 * // buffer private static String concat="";
+	 */
 	/**
 	 * Methode principale
 	 * 
@@ -95,8 +104,9 @@ public class Main {
 	 * @throws NotEnoughServeurException
 	 * @throws AlreadyChoosedException
 	 * @throws NotAllowedValueException
+	 * @throws FileNotFoundException
 	 */
-	public static void main(String[] args) throws TournamentStateException, AllowedPlayerException, NotEnoughServeurException, AlreadyChoosedException, NotAllowedValueException {
+	public static void main(String[] args) throws TournamentStateException, AllowedPlayerException, NotEnoughServeurException, AlreadyChoosedException, NotAllowedValueException,FileNotFoundException {
 		// TODO Auto-generated method stub
 
 		// programme principal  //
@@ -164,8 +174,9 @@ public class Main {
 
 					System.out.println("c'est donc au "+user.getBarList().get(selection).getNom()+" que tu veux entrer !! Bon choix ");
 					System.out.println("Devine quoi ?? le videur c'est un de nos potes, tu rentres et tu sors comme tu veux on a gere");
-
-					// selecetion du personnage (client)
+					//concat= "user entre dans le bar"+user.getBarList().get(selection).getNom();
+					
+					// selection du personnage (client)
 
 					selectMyPerso(bar);
 
